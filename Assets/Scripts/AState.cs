@@ -5,7 +5,7 @@
         protected ProximitySensor proximitySensor;
         protected StateMachine stateMachine;
         protected Engine engine;
-        
+
         protected AState(ProximitySensor proximitySensor, StateMachine stateMachine, Engine engine)
         {
             this.proximitySensor = proximitySensor;

@@ -13,7 +13,7 @@ namespace Assets.Scripts
 
         public override void OnEnter()
         {
-            engine.SetMoveSpeed(2);
+            engine.SetMoveSpeed(4);
         }
 
         public override void Tick()

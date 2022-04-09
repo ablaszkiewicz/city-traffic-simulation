@@ -7,7 +7,10 @@ namespace Assets.Scripts
         private AState state;
         private ProximitySensor proximitySensor;
         private Engine engine;
-        
+        private State currentStateEnum;
+
+        public State CurrentState => currentStateEnum;
+
         private void Start()
         {
             proximitySensor = GetComponent<ProximitySensor>();
@@ -33,6 +36,8 @@ namespace Assets.Scripts
                     state = new StoppedState(proximitySensor, this, engine);
                     break;
             }
+
+            currentStateEnum = newState;
         }
     }
 }
