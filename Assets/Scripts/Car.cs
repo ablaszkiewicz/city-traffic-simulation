@@ -29,8 +29,8 @@ public class Car : MonoBehaviour
     {
         CarDto dto = new CarDto();
         dto.ID = ID;
-        dto.x = transform.position.x;
-        dto.z = transform.position.z;
+        dto.position.x = transform.position.x;
+        dto.position.y = transform.position.z;
         dto.state = stateMachine.CurrentState.ToString();
 
         return dto;

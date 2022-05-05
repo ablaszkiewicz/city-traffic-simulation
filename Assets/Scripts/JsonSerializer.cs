@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using Assets.Scripts.DTOs;
@@ -18,6 +19,8 @@ namespace Assets.Scripts
         
         private void Update()
         {
+            Debug.Log("Saving");
+            
             var dto = GenerateSimulationDto();
             streamWriter.WriteLine($"{JsonUtility.ToJson(dto)},");
         }
@@ -31,7 +34,8 @@ namespace Assets.Scripts
             {
                 simulationDto.carDtos.Add(car.GenerateCarDto());
             }
-
+            
+            simulationDto.timestamp = DateTime.Now.ToString();
             return simulationDto;
         }
 

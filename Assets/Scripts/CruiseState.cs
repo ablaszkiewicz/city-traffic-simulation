@@ -18,6 +18,7 @@ namespace Assets.Scripts
 
         public override void Tick()
         {
+            Debug.Log(proximitySensor.GetDistanceToClosestObjectOnPath());
             if (proximitySensor.GetDistanceToClosestObjectOnPath() < STOP_THRESHOLD)
             {
                 stateMachine.ChangeState(State.STOPPED);

@@ -71,6 +71,7 @@ namespace Assets.Scripts
                 distanceToObstacle = Single.PositiveInfinity;
             }
 
+            Debug.Log(distanceToObstacle);
             return distanceToObstacle;
         }
 
