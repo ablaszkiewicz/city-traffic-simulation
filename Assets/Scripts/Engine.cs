@@ -16,13 +16,13 @@ namespace Assets.Scripts
         {
             owner = GetComponent<Car>();
             path = owner.Path;
-            Debug.Log(path);
         }
         
         private void Update()
         {
             distanceTravelled += moveSpeed * Time.deltaTime;
             transform.position = path.GetPointAtDistance(distanceTravelled);
+            transform.rotation = path.GetRotationAtDistance(distanceTravelled);
         }
 
         public void SetMoveSpeed(float newMoveSpeed)

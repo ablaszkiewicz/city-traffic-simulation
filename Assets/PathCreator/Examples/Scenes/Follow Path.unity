@@ -181,8 +181,8 @@ MonoBehaviour:
       globalNormalsAngle: 69
       flipNormals: 0
     vertexPathUpToDate: 1
-    vertexPathMaxAngleError: 0.3
-    vertexPathMinVertexSpacing: 0
+    vertexPathMaxAngleError: 3.5
+    vertexPathMinVertexSpacing: 1
     showTransformTool: 1
     showPathBounds: 0
     showPerSegmentBounds: 0

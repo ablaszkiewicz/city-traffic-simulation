@@ -25,8 +25,6 @@ namespace Assets.Scripts
 
         public void ChangeState(State newState)
         {
-            Debug.Log($"Changing state to {newState}");
-            
             switch (newState)
             {
                 case State.CRUISE:

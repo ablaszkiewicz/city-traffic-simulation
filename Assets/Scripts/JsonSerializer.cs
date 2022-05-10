@@ -19,8 +19,6 @@ namespace Assets.Scripts
         
         private void Update()
         {
-            Debug.Log("Saving");
-            
             var dto = GenerateSimulationDto();
             streamWriter.WriteLine($"{JsonUtility.ToJson(dto)},");
         }
