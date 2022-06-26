@@ -6,28 +6,36 @@ namespace Assets.Scripts
     public class Engine : MonoBehaviour
     {
         [SerializeField]
-        private float distanceTravelled = 0;
+        private float distanceTravelledOnThisPath = 0;
         
-        private float moveSpeed = 2;
-        private VertexPath path;
-        private Car owner;
+        [SerializeField]
+        private float moveSpeed;
         
+        private PathPlanner pathPlanner;
+        private bool canMove;
+
         private void Start()
         {
-            owner = GetComponent<Car>();
-            path = owner.Path;
+            pathPlanner = GetComponent<PathPlanner>();
         }
         
         private void Update()
         {
-            distanceTravelled += moveSpeed * Time.deltaTime;
-            transform.position = path.GetPointAtDistance(distanceTravelled);
-            transform.rotation = path.GetRotationAtDistance(distanceTravelled);
+            if (!canMove) return;
+            
+            distanceTravelledOnThisPath += moveSpeed * Time.deltaTime;
+            transform.position = pathPlanner.GetPointAtDistance(distanceTravelledOnThisPath);
+            transform.rotation = pathPlanner.GetRotationAtDistance(distanceTravelledOnThisPath);
         }
 
-        public void SetMoveSpeed(float newMoveSpeed)
+        public void SetCanMove(bool canMove)
         {
-            moveSpeed = newMoveSpeed;
+            this.canMove = canMove;
+        }
+
+        public void ResetDistanceTravelledOnThisPath()
+        {
+            distanceTravelledOnThisPath = 0;
         }
     }
 }

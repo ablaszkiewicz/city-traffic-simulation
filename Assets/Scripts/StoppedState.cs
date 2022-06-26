@@ -10,7 +10,7 @@
 
         public override void OnEnter()
         {
-            engine.SetMoveSpeed(0);
+            engine.SetCanMove(false);
         }
 
         public override void Tick()

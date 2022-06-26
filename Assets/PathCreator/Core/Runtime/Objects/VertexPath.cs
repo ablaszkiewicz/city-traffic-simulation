@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using PathCreation.Utility;
 using UnityEngine;
 
@@ -11,7 +12,7 @@ namespace PathCreation {
     /// This class also provides methods for getting the position along the path at a certain distance or time
     /// (where time = 0 is the start of the path, and time = 1 is the end of the path).
     /// Other info about the path (tangents, normals, rotation) can also be retrieved in this manner.
-
+    
     public class VertexPath {
         #region Fields
 

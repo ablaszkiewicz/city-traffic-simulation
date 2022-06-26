@@ -13,12 +13,11 @@ namespace Assets.Scripts
 
         public override void OnEnter()
         {
-            engine.SetMoveSpeed(4);
+            engine.SetCanMove(true);
         }
 
         public override void Tick()
         {
-            Debug.Log(proximitySensor.GetDistanceToClosestObjectOnPath());
             if (proximitySensor.GetDistanceToClosestObjectOnPath() < STOP_THRESHOLD)
             {
                 stateMachine.ChangeState(State.STOPPED);
