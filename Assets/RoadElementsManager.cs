@@ -39,20 +39,33 @@ public class RoadElementsManager : MonoBehaviour
         }
     }
 
-    public IRoadElement GetRoadElementWhichStartsAtPoint(Vector3 point)
+    public IRoadElement GetRoadElementStartingAtPoint(Vector3 point, IRoadElement original)
     {
-        return GetRoadElementFromPathCreator(GetPathCreatorWhichStartsAtPoint(point));
+        var pathCreatorsToIgnore = original.GetPathCreators();
+        var closestPathCreator = GetPathCreatorStartingAtPoint(point, pathCreatorsToIgnore);
+        return closestPathCreator != null ?  GetRoadElementFromPathCreator(closestPathCreator) : null;
     }
 
-    public PathCreator GetPathCreatorWhichStartsAtPoint(Vector3 point)
+    public PathCreator GetPathCreatorStartingAtPoint(Vector3 point, List<PathCreator> pathCreatorsToIgnore)
     {
         var crossroadsPathCreators = crossroads
             .Select(crossroad => crossroad.GetComponentsInChildren<PathCreator>()).SelectMany(x=>x).ToList();
         
-        var startEndPoints = crossroadsPathCreators.Select(GetStartEndPoints).ToList();
-        var closestStartEndPoint = startEndPoints.OrderBy(tuple => Vector3.Distance(tuple.startPoint, point)).FirstOrDefault();
+        var roadsPathCreators = roads
+            .Select(crossroad => crossroad.GetComponentsInChildren<PathCreator>()).SelectMany(x=>x).ToList();
 
-        return closestStartEndPoint.pathCreator;
+        var pathCreators = crossroadsPathCreators.Concat(roadsPathCreators).ToList();
+        
+        var startEndPoints = pathCreators
+            .Where(p => !pathCreatorsToIgnore.Contains(p))
+            .Select(GetStartEndPoints).ToList();
+        
+        var closestStartEndPoint = startEndPoints
+            .OrderBy(tuple => Vector3.Distance(tuple.startPoint, point))
+            .FirstOrDefault(tuple => Vector3.Distance(tuple.startPoint, point) < 1);
+
+
+        return closestStartEndPoint?.pathCreator;
     }
     
     public  PathCreatorStartEndPoints GetStartEndPoints(PathCreator pathCreator)

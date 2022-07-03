@@ -7,6 +7,7 @@ using UnityEngine;
 public class Road : MonoBehaviour, IRoadElement
 {
     private PathCreator pathCreator;
+    private List<IRoadElement> nextRoadElements = new List<IRoadElement>();
     
     private void Awake()
     {
@@ -15,14 +16,24 @@ public class Road : MonoBehaviour, IRoadElement
     
     private void Start()
     {
-        var points = RoadElementsManager.Instance.GetStartEndPoints(pathCreator);
-        
-        var nextPathCreator = RoadElementsManager.Instance.GetPathCreatorWhichStartsAtPoint(points.endPoint);
-        Debug.Log(nextPathCreator.gameObject.name);
-        
-        var nextRoadElement = RoadElementsManager.Instance.GetRoadElementWhichStartsAtPoint(points.endPoint);
-        Debug.Log(nextRoadElement.GetRoadElementType());
+        InitializeNextRoadElement();
+    }
 
+    private void InitializeNextRoadElement()
+    {
+        var points = RoadElementsManager.Instance.GetStartEndPoints(pathCreator);
+        var nextRoadElement = RoadElementsManager.Instance.GetRoadElementStartingAtPoint(points.endPoint, this);
+
+        // if (nextRoadElement is Crossroad)
+        // {
+        //     Debug.Log($"Next road element is: {((Crossroad)nextRoadElement).gameObject.name}");
+        // }
+        // else if (nextRoadElement is Road)
+        // {
+        //     Debug.Log($"Next road element is: {((Road)nextRoadElement).gameObject.name}");
+        // }
+        
+        nextRoadElements.Add(nextRoadElement);
     }
     
     public RoadElementType GetRoadElementType() => RoadElementType.ROAD;
@@ -32,5 +43,10 @@ public class Road : MonoBehaviour, IRoadElement
         var list = new List<PathCreator>();
         list.Add(pathCreator);
         return list;
+    }
+
+    public List<IRoadElement> GetNextRoadElements()
+    {
+        return nextRoadElements;
     }
 }
