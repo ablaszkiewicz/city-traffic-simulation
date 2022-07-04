@@ -45,8 +45,39 @@ public class RoadElementsManager : MonoBehaviour
         var closestPathCreator = GetPathCreatorStartingAtPoint(point, pathCreatorsToIgnore);
         return closestPathCreator != null ?  GetRoadElementFromPathCreator(closestPathCreator) : null;
     }
+    
+    public IRoadElement GetRoadElementEndingAtPoint(Vector3 point, IRoadElement original)
+    {
+        var pathCreatorsToIgnore = original.GetPathCreators();
+        var closestPathCreator = GetPathCreatorEndingAtPoint(point, pathCreatorsToIgnore);
+        return closestPathCreator != null ?  GetRoadElementFromPathCreator(closestPathCreator) : null;
+    }
 
     public PathCreator GetPathCreatorStartingAtPoint(Vector3 point, List<PathCreator> pathCreatorsToIgnore)
+    {
+        var startEndPoints = GetPathCreatorstartEndPointsTuples(pathCreatorsToIgnore);
+        
+        var closestStartEndPoint = startEndPoints
+            .OrderBy(tuple => Vector3.Distance(tuple.startPoint, point))
+            .FirstOrDefault(tuple => Vector3.Distance(tuple.startPoint, point) < 1);
+
+
+        return closestStartEndPoint?.pathCreator;
+    }
+    
+    public PathCreator GetPathCreatorEndingAtPoint(Vector3 point, List<PathCreator> pathCreatorsToIgnore)
+    {
+        var startEndPoints = GetPathCreatorstartEndPointsTuples(pathCreatorsToIgnore);
+        
+        var closestStartEndPoint = startEndPoints
+            .OrderBy(tuple => Vector3.Distance(tuple.endPoint, point))
+            .FirstOrDefault(tuple => Vector3.Distance(tuple.endPoint, point) < 1);
+
+
+        return closestStartEndPoint?.pathCreator;
+    }
+
+    private List<PathCreatorStartEndPoints> GetPathCreatorstartEndPointsTuples(List<PathCreator> pathCreatorsToIgnore)
     {
         var crossroadsPathCreators = crossroads
             .Select(crossroad => crossroad.GetComponentsInChildren<PathCreator>()).SelectMany(x=>x).ToList();
@@ -59,13 +90,8 @@ public class RoadElementsManager : MonoBehaviour
         var startEndPoints = pathCreators
             .Where(p => !pathCreatorsToIgnore.Contains(p))
             .Select(GetStartEndPoints).ToList();
-        
-        var closestStartEndPoint = startEndPoints
-            .OrderBy(tuple => Vector3.Distance(tuple.startPoint, point))
-            .FirstOrDefault(tuple => Vector3.Distance(tuple.startPoint, point) < 1);
 
-
-        return closestStartEndPoint?.pathCreator;
+        return startEndPoints;
     }
     
     public  PathCreatorStartEndPoints GetStartEndPoints(PathCreator pathCreator)

@@ -8,10 +8,13 @@ using UnityEngine;
 public class PathPlanner : MonoBehaviour
 {
     [SerializeField]
-    private PathParent firstElement;
+    private List<IRoadElement> startingRoadElements;
     
     [SerializeField]
-    private List<PathParent> pathParents;
+    private List<IRoadElement> randomRoadElements = new List<IRoadElement>();
+    
+    [SerializeField]
+    private List<IRoadElement> roadElements;
 
     private float cumulativeLengthOfAlreadyFinishedPaths = 0;
 
@@ -21,45 +24,62 @@ public class PathPlanner : MonoBehaviour
     private int currentPathIndex = 0;
     private Engine engine;
 
+    private System.Random random = new System.Random();
+    
     private void Start()
     {
         engine = GetComponent<Engine>();
         
+        Invoke("Initialize", 1);
+    }
+
+    private void Initialize()
+    {
         RandomizePath();
         InitializeLocalPaths();
         ChangeToNextPath();
-        
     }
 
     private void RandomizePath()
     {
-        pathParents= new List<PathParent>();
-        pathParents.Add(firstElement);
+        var startingRoadElement = startingRoadElements[random.Next(startingRoadElements.Count)];
+        
+        randomRoadElements.Add(startingRoadElement);
+        var currentElement = startingRoadElement;
+        IRoadElement previous = null;
+        
+        while(true)
+        {
+            var possibleNextRoadElements = currentElement.GetNextRoadElements(previous);
 
-        var nextElementOptions = firstElement.GetPossibleExits(firstElement);
-        Debug.Log(nextElementOptions.Count);
-        //pathParents.Add(nextElementOptions[0]);
+            Debug.Log($"{gameObject.name} LENGTH: {possibleNextRoadElements.Count}");
+
+            if (possibleNextRoadElements.Count == 0)
+            {
+                return;
+            }
+            
+            int randomIndex = random.Next(possibleNextRoadElements.Count);
+            previous = currentElement;
+            currentElement = possibleNextRoadElements[randomIndex];
+            randomRoadElements.Add(currentElement);
+        }
+        
     }
-
+    
     private void InitializeLocalPaths()
     {
-        for (int i = 0; i < pathParents.Count; i++)
+        roadElements = randomRoadElements;
+        
+        for (int i = 0; i < roadElements.Count; i++)
         {
-            var pathParent = pathParents[i];
-
-            if (pathParent.RequiresNextPlannedPath)
-            {
-                var previousPathParent = pathParents[i - 1];
-                var nextPathParent = pathParents[i + 1];
-                var path = pathParent.GetPath(previousPathParent, nextPathParent);
-                localPaths.Add(path);
-
-            }
-            else
-            {
-                var path = pathParent.GetPath();
-                localPaths.Add(path);
-            }
+            var previousRoadElement = i == 0 ? null : roadElements[i - 1];
+            var currentRoadElement = roadElements[i];
+            var nextRoadElement = i >= roadElements.Count - 1 ? null : roadElements[i + 1];
+            
+            
+            var pathCreator = currentRoadElement.GetPathCreatorToGetThrough(previousRoadElement, nextRoadElement);
+            localPaths.Add(pathCreator.path);
         }
     }
     
@@ -82,31 +102,11 @@ public class PathPlanner : MonoBehaviour
     {
         currentPath = localPaths[currentPathIndex];
         currentPathIndex++;
-        if (currentPathIndex == pathParents.Count)
+        if (currentPathIndex == roadElements.Count)
         {
             currentPathIndex = 0;
         }
-        
-        // var previousPathParent = pathParents[currentPathIndex];
-        // currentPathIndex++;
-        // if (currentPathIndex == pathParents.Count)
-        // {
-        //     currentPathIndex = 0;
-        // }
-        //
-        // var nextPathParent = pathParents[currentPathIndex];
-        //
-        //
-        // if (nextPathParent.RequiresNextPlannedPath)
-        // {
-        //     var nextNextPathParent = pathParents[currentPathIndex + 1];
-        //     currentPath = pathParents[currentPathIndex].GetPath(previousPathParent, nextNextPathParent);
-        // }
-        // else
-        // {
-        //     currentPath = pathParents[currentPathIndex].GetPath();
-        // }
-        
+
         engine.ResetDistanceTravelledOnThisPath();
     }
     

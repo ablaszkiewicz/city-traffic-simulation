@@ -1,19 +1,22 @@
 ﻿using System.Collections.Generic;
 using PathCreation;
+using UnityEngine;
 
 namespace Assets.Scripts
 {
-    public interface IRoadElement
+    public abstract class IRoadElement : MonoBehaviour
     {
-        public List<IRoadElement> GetNextRoadElements();
-        public List<PathCreator> GetPathCreators();
-        public RoadElementType GetRoadElementType();
+        [SerializeField]
+        protected List<IRoadElement> nextRoadElements = new List<IRoadElement>();
         
-    }
+        [SerializeField]
+        protected List<IRoadElement> previousRoadElements = new List<IRoadElement>();
+        
+        public abstract List<IRoadElement> GetNextRoadElements(IRoadElement previous);
+        public abstract List<PathCreator> GetPathCreators();
+        public abstract PathCreator GetPathCreatorToGetThrough(IRoadElement previous, IRoadElement next);
 
-    public enum RoadElementType
-    {
-        ROAD,
-        CROSSROAD,
+        public abstract List<RoadElementsPathCreatorTuple> GetMap();
     }
+    
 }

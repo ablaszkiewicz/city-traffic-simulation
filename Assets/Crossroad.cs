@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
@@ -5,10 +6,19 @@ using Assets.Scripts;
 using PathCreation;
 using UnityEngine;
 
-public class Crossroad : MonoBehaviour, IRoadElement
+[Serializable]
+public class RoadElementsPathCreatorTuple
+{
+    public IRoadElement previous;
+    public PathCreator pathCreator;
+    public IRoadElement next;
+}
+
+public class Crossroad : IRoadElement
 {
     private List<PathCreator> pathCreators;
-    private List<IRoadElement> nextRoadElements = new List<IRoadElement>();
+    
+    
     
     private void Awake()
     {
@@ -17,46 +27,72 @@ public class Crossroad : MonoBehaviour, IRoadElement
 
     private void Start()
     {
-        InitializeNextRoadElements();
+        InitializePreviousAndNextRoadElements();
+        InitializeGetThroughMap();
     }
 
-    public List<PathCreator> GetPathCreators()
+    public override List<PathCreator> GetPathCreators()
     {
         return pathCreators;
     }
-
-    public RoadElementType GetRoadElementType() => RoadElementType.CROSSROAD;
-
-    public List<IRoadElement> GetNextRoadElements()
+    
+    [SerializeField]
+    private List<RoadElementsPathCreatorTuple> pathCreatorsMap = new List<RoadElementsPathCreatorTuple>(); 
+    public override List<IRoadElement> GetNextRoadElements(IRoadElement previous)
     {
-        throw new System.NotImplementedException();
+        return pathCreatorsMap.Where(tuple => tuple.previous == previous).Select(tuple => tuple.next).ToList();
     }
 
-    private void InitializeNextRoadElements()
+    private void InitializePreviousAndNextRoadElements()
     {
         foreach(var pathCreator in pathCreators)
         {
             var points = RoadElementsManager.Instance.GetStartEndPoints(pathCreator);
             var nextRoadElement = RoadElementsManager.Instance.GetRoadElementStartingAtPoint(points.endPoint, this);
+            var previousRoadElement = RoadElementsManager.Instance.GetRoadElementEndingAtPoint(points.startPoint, this);
             
-            // if (nextRoadElement is Crossroad)
-            // {
-            //     Debug.Log($"Next road element is: {((Crossroad)nextRoadElement).gameObject.name}");
-            // }
-            // else if (nextRoadElement is Road)
-            // {
-            //     Debug.Log($"Next road element is: {((Road)nextRoadElement).gameObject.name}");
-            // }
-
+            
+            if (previousRoadElement != null)
+            {
+                previousRoadElements.Add(previousRoadElement);
+            }
+            
             if (nextRoadElement != null)
             {
                 nextRoadElements.Add(nextRoadElement);
             }
-            else
-            {
-                Debug.Log($"Didn't find any matching next road elements for {pathCreator.gameObject.name}");
-            }
-            
         }
+
+        nextRoadElements = nextRoadElements.Distinct().ToList();
+        previousRoadElements = previousRoadElements.Distinct().ToList();
+    }
+
+    private void InitializeGetThroughMap()
+    {
+        foreach(var pathCreator in pathCreators)
+        {
+            var points = RoadElementsManager.Instance.GetStartEndPoints(pathCreator);
+            var nextRoadElement = RoadElementsManager.Instance.GetRoadElementStartingAtPoint(points.endPoint, this);
+            var previousRoadElement = RoadElementsManager.Instance.GetRoadElementEndingAtPoint(points.startPoint, this);
+            
+            if (previousRoadElement != null && nextRoadElement != null)
+            {
+                var tuple = new RoadElementsPathCreatorTuple()
+                    {previous = previousRoadElement, pathCreator = pathCreator, next = nextRoadElement};
+                
+                pathCreatorsMap.Add(tuple);
+            }
+        }
+    }
+
+    public override PathCreator GetPathCreatorToGetThrough(IRoadElement previous, IRoadElement next)
+    {
+        return pathCreatorsMap.FirstOrDefault(tuple => tuple.previous == previous && tuple.next == next).
+            pathCreator;
+    }
+
+    public override List<RoadElementsPathCreatorTuple> GetMap()
+    {
+        return pathCreatorsMap;
     }
 }
