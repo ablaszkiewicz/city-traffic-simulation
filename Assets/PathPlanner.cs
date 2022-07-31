@@ -52,8 +52,6 @@ public class PathPlanner : MonoBehaviour
         {
             var possibleNextRoadElements = currentElement.GetNextRoadElements(previous);
 
-            Debug.Log($"{gameObject.name} LENGTH: {possibleNextRoadElements.Count}");
-
             if (possibleNextRoadElements.Count == 0)
             {
                 return;
