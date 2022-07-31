@@ -8,7 +8,7 @@ namespace Assets.Scripts.DTOs
     {
         public string settingsHash = "dupa";
         public string mapHash = "dupa";
+        public int frame;
         public List<CarDto> carDtos = new List<CarDto>();
-        public string timestamp;
     }
 }

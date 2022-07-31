@@ -18,8 +18,6 @@ public class Crossroad : IRoadElement
 {
     private List<PathCreator> pathCreators;
     
-    
-    
     private void Awake()
     {
         pathCreators = GetComponentsInChildren<PathCreator>().ToList();

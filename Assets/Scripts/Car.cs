@@ -7,21 +7,19 @@ using Assets.Scripts.DTOs;
 using PathCreation;
 using UnityEngine;
 using UnityEngine.UIElements;
+using Random = UnityEngine.Random;
 
 public class Car : MonoBehaviour
 {
     [SerializeField]
-    private PathCreator pathCreator;
-
-    [SerializeField]
     private int id;
-    public VertexPath Path => pathCreator.path;
     public int ID => id;
     
     private StateMachine stateMachine;
 
     private void Start()
     {
+        id = Random.Range(0, 100000);
         stateMachine = GetComponent<StateMachine>();
     }
 

@@ -10,17 +10,29 @@ namespace Assets.Scripts
     public class JsonSerializer: MonoBehaviour
     {
         private StreamWriter streamWriter;
+        private int frame = 0;
+        private bool firstLine = true;
 
         private void Start()
         {
-            streamWriter = new StreamWriter(Application.persistentDataPath + "/data.json");
+            streamWriter = new StreamWriter("C:/Users/Aleksander/Desktop/data.json");
             streamWriter.WriteLine("[");
         }
         
         private void Update()
         {
             var dto = GenerateSimulationDto();
-            streamWriter.WriteLine($"{JsonUtility.ToJson(dto)},");
+
+            if (firstLine)
+            {
+                streamWriter.Write($"{JsonUtility.ToJson(dto)}");
+                firstLine = false;
+            }
+            else
+            {
+                streamWriter.WriteLine(",");
+                streamWriter.Write($"{JsonUtility.ToJson(dto)}");
+            }
         }
 
         private SimulationDto GenerateSimulationDto()
@@ -32,13 +44,15 @@ namespace Assets.Scripts
             {
                 simulationDto.carDtos.Add(car.GenerateCarDto());
             }
-            
-            simulationDto.timestamp = DateTime.Now.ToString();
+
+            simulationDto.frame = frame;
+            frame++;
             return simulationDto;
         }
 
         void OnApplicationQuit()
         {
+            streamWriter.Write("]");
             streamWriter.Close();
         }
     }
