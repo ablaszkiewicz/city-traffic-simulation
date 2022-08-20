@@ -21,7 +21,7 @@ namespace Assets.Scripts
         
         private void Update()
         {
-            if (!canMove) return;
+            if (!canMove || !pathPlanner.IsReady) return;
             
             distanceTravelledOnThisPath += moveSpeed * Time.deltaTime;
             transform.position = pathPlanner.GetPointAtDistance(distanceTravelledOnThisPath);

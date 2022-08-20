@@ -23,9 +23,15 @@ public class PathPlanner : MonoBehaviour
     private VertexPath currentPath;
     private int currentPathIndex = 0;
     private Engine engine;
+    private bool isReady = false;
 
     private System.Random random = new System.Random();
-    
+
+    public bool IsReady
+    {
+        get => isReady;
+    }
+
     private void Start()
     {
         engine = GetComponent<Engine>();
@@ -38,6 +44,7 @@ public class PathPlanner : MonoBehaviour
         RandomizePath();
         InitializeLocalPaths();
         ChangeToNextPath();
+        isReady = true;
     }
 
     private void RandomizePath()
@@ -83,6 +90,8 @@ public class PathPlanner : MonoBehaviour
     
     public Vector3 GetPointAtDistance(float distance)
     {
+
+
         if (distance > currentPath.length)
         {
             ChangeToNextPath();

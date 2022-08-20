@@ -10,49 +10,45 @@ namespace Assets.Scripts
     public class JsonSerializer: MonoBehaviour
     {
         private StreamWriter streamWriter;
-        private int frame = 0;
+        private int frameCount = 0;
         private bool firstLine = true;
+        private SimulationChunkDto simulationChunk;
 
         private void Start()
         {
+            simulationChunk = new SimulationChunkDto();
+            simulationChunk.frames = new List<FrameDto>();
+            
             streamWriter = new StreamWriter("C:/Users/Aleksander/Desktop/data.json");
-            streamWriter.WriteLine("[");
         }
         
         private void Update()
         {
-            var dto = GenerateSimulationDto();
-
-            if (firstLine)
-            {
-                streamWriter.Write($"{JsonUtility.ToJson(dto)}");
-                firstLine = false;
-            }
-            else
-            {
-                streamWriter.WriteLine(",");
-                streamWriter.Write($"{JsonUtility.ToJson(dto)}");
-            }
+            var frameDto = GenerateFrameDto();
+            simulationChunk.frames.Add(frameDto);
         }
 
-        private SimulationDto GenerateSimulationDto()
+        private FrameDto GenerateFrameDto()
         {
-            SimulationDto simulationDto = new SimulationDto();
+            var frame = new FrameDto();
+            frame.frame = frameCount;
+            frame.cars = new List<CarDto>();
+            
             List<Car> cars = FindObjectsOfType<Car>().ToList();
-
+            
+            
             foreach (var car in cars)
             {
-                simulationDto.carDtos.Add(car.GenerateCarDto());
+                frame.cars.Add(car.GenerateCarDto());
             }
 
-            simulationDto.frame = frame;
-            frame++;
-            return simulationDto;
+            frameCount++;
+            return frame;
         }
 
         void OnApplicationQuit()
         {
-            streamWriter.Write("]");
+            streamWriter.Write(JsonUtility.ToJson(simulationChunk));
             streamWriter.Close();
         }
     }
