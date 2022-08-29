@@ -34,7 +34,6 @@ public class LightsTimer : MonoBehaviour
 
     private void ProcessLightsTiming(LightsTiming lightsTiming)
     {
-        Debug.Log("Processing duration of " + lightsTiming.duration);
         TurnOffAllLights();
         
         lightsTiming.trafficLightsToTurnOn.ForEach(delegate(TrafficLight trafficLight)

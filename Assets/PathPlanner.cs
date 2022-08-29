@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
@@ -8,7 +9,10 @@ using UnityEngine;
 public class PathPlanner : MonoBehaviour
 {
     [SerializeField]
-    private List<IRoadElement> startingRoadElements;
+    private bool destroyOnPathFinish;
+    
+    [SerializeField]
+    private List<IRoadElement> defaultStartingRoadElements;
     
     [SerializeField]
     private List<IRoadElement> randomRoadElements = new List<IRoadElement>();
@@ -32,22 +36,33 @@ public class PathPlanner : MonoBehaviour
         get => isReady;
     }
 
-    private void Start()
+    private void Awake()
     {
         engine = GetComponent<Engine>();
-        
-        Invoke("Initialize", 1);
     }
 
-    private void Initialize()
+    private void Start()
     {
-        RandomizePath();
+        // Invoke("InitializeWithDefaultRoadElements", 1);
+    }
+
+    private void InitializeWithDefaultRoadElements()
+    {
+        RandomizePath(defaultStartingRoadElements);
+        InitializeLocalPaths();
+        ChangeToNextPath();
+        isReady = true;
+    }
+    
+    public void Initialize(List<IRoadElement> startingRoadElements)
+    {
+        RandomizePath(startingRoadElements);
         InitializeLocalPaths();
         ChangeToNextPath();
         isReady = true;
     }
 
-    private void RandomizePath()
+    private void RandomizePath(List<IRoadElement> startingRoadElements)
     {
         var startingRoadElement = startingRoadElements[random.Next(startingRoadElements.Count)];
         
@@ -90,10 +105,13 @@ public class PathPlanner : MonoBehaviour
     
     public Vector3 GetPointAtDistance(float distance)
     {
-
-
         if (distance > currentPath.length)
         {
+            if (currentPath == localPaths[^1] && destroyOnPathFinish)
+            {
+                Destroy(gameObject);
+            }
+            
             ChangeToNextPath();
             return currentPath.GetPointAtDistance(0);
         }
