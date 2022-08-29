@@ -13,8 +13,7 @@ public class Car : MonoBehaviour
 {
     [SerializeField]
     private int id;
-    public int ID => id;
-    
+
     private StateMachine stateMachine;
 
     private void Start()
@@ -26,7 +25,7 @@ public class Car : MonoBehaviour
     public CarDto GenerateCarDto()
     {
         CarDto dto = new CarDto();
-        dto.ID = ID;
+        dto.id = id;
         dto.position.x = transform.position.x;
         dto.position.y = transform.position.z;
         dto.state = stateMachine.CurrentState.ToString();
