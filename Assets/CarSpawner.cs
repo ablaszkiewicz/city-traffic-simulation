@@ -8,19 +8,37 @@ using UnityEngine;
 
 public class CarSpawner : MonoBehaviour
 {
+    [SerializeField, Range(0.0f, 5.0f)]
+    private float spawnInterval;
+    
     [SerializeField]
     private GameObject carPrefab;
     private void Start()
     {
-        InvokeRepeating("Spawn", 0.1f, 1f);
+        //InvokeRepeating("Spawn", 0.5f, spawnInterval);
         //Invoke("Spawn", 1f);
+        StartCoroutine("RepeatingCoroutine");
+    }
+
+    private IEnumerator RepeatingCoroutine()
+    {
+        float normalizedTime = 0;
+
+        while (normalizedTime <= 1f)
+        {
+            normalizedTime += Time.deltaTime / spawnInterval;
+            yield return null;
+        }
+        
+        Spawn();
+        StartCoroutine("RepeatingCoroutine");
     }
 
     private void Spawn()
     {
         var closest = FindClosestRoad();
-        var car = Instantiate(carPrefab.gameObject, closest.transform.position, Quaternion.identity);
-        
+        var car = Instantiate(carPrefab.gameObject, closest.GetPathCreators()[0].path.GetPoint(0), Quaternion.identity);
+
         car.GetComponent<PathPlanner>().Initialize(new List<IRoadElement> {closest});
     }
 

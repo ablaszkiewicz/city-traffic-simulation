@@ -26,7 +26,7 @@ namespace Assets.Scripts
             
             streamWriter = new StreamWriter("C:/Users/Aleksander/Desktop/data.json");
             
-            //InvokeRepeating("SendSimulationData", 0, 0.1f);
+            InvokeRepeating("SendSimulationData", 0, 0.1f);
             
         }
         
@@ -67,7 +67,7 @@ namespace Assets.Scripts
         {
             Debug.Log("SENDING");
             
-            var request = new UnityWebRequest("https://ctsbackend.bieda.it/test", "POST");
+            var request = new UnityWebRequest("https://ctsbackend.bieda.it/api/simulation", "POST");
             request.SetRequestHeader("Content-Type", "application/json");
             request.SetRequestHeader("ApiKey", "1234");
             byte[] data = Encoding.UTF8.GetBytes(JsonUtility.ToJson(simulationChunk));
