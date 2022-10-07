@@ -1,4 +1,5 @@
 ﻿using PathCreation;
+using UnityEditor.UIElements;
 using UnityEngine;
 
 namespace Assets.Scripts
@@ -10,6 +11,9 @@ namespace Assets.Scripts
         
         [SerializeField]
         private float moveSpeed;
+
+        [SerializeField]
+        private AnimationCurve breakingCurve;
         
         private PathPlanner pathPlanner;
         private bool canMove;

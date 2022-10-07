@@ -59,11 +59,11 @@ namespace Assets.Scripts
 
         private void SendSimulationData()
         {
-            StartCoroutine("PostRequest");
+            StartCoroutine("SimluationChunkPostRequest");
             simulationChunk.frames.Clear();
         }
 
-        private IEnumerator PostRequest()
+        private IEnumerator SimluationChunkPostRequest()
         {
             Debug.Log("SENDING");
             
@@ -76,10 +76,26 @@ namespace Assets.Scripts
             
             Debug.Log("SENT");
         }
+        
+        private IEnumerator ComputePostRequest()
+        {
+            Debug.Log("SENDING COMPUTE SIGNAL");
+            
+            var request = new UnityWebRequest("https://ctscompms.bieda.it/api/process?settings_hash=demo&map_hash=demo", "POST");
+            // request.SetRequestHeader("Content-Type", "application/json");
+            // request.SetRequestHeader("ApiKey", "1234");
+            // byte[] data = Encoding.UTF8.GetBytes(JsonUtility.ToJson(simulationChunk));
+            // request.uploadHandler = new UploadHandlerRaw(data);
+            yield return request.SendWebRequest();
+            
+            Debug.Log("COMPUTED");
+        }
         void OnApplicationQuit()
         {
             streamWriter.Write(JsonUtility.ToJson(simulationChunk));
             streamWriter.Close();
+
+            //StartCoroutine("ComputePostRequest");
         }
     }
 }

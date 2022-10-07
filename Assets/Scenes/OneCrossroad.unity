@@ -183,7 +183,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &171663916
 Transform:
   m_ObjectHideFlags: 0
@@ -212,7 +212,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 408bd3eef2b06c44e9ea45ec81f68a87, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  spawnInterval: 0
+  spawnInterval: 1
   carPrefab: {fileID: 739169608486648387, guid: 0e04b407f9b35954098893219cc821ae, type: 3}
 --- !u!1 &187043444
 GameObject:
@@ -479,7 +479,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!114 &503070582
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -492,7 +492,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 408bd3eef2b06c44e9ea45ec81f68a87, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  spawnInterval: 0
+  spawnInterval: 1
   carPrefab: {fileID: 739169608486648387, guid: 0e04b407f9b35954098893219cc821ae, type: 3}
 --- !u!4 &503070583
 Transform:
