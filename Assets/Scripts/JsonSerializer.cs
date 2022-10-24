@@ -59,13 +59,13 @@ namespace Assets.Scripts
 
         private void SendSimulationData()
         {
-            StartCoroutine("SimluationChunkPostRequest");
+            //StartCoroutine("SimluationChunkPostRequest");
             simulationChunk.frames.Clear();
         }
 
         private IEnumerator SimluationChunkPostRequest()
         {
-            Debug.Log("SENDING");
+            //Debug.Log("SENDING");
             
             var request = new UnityWebRequest("https://ctsbackend.bieda.it/api/simulation", "POST");
             request.SetRequestHeader("Content-Type", "application/json");

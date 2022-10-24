@@ -1,4 +1,5 @@
-﻿using PathCreation;
+﻿using System;
+using PathCreation;
 using UnityEditor.UIElements;
 using UnityEngine;
 
@@ -17,6 +18,7 @@ namespace Assets.Scripts
         
         private PathPlanner pathPlanner;
         private bool canMove;
+        private float velocityMultiplier;
 
         private void Start()
         {
@@ -26,8 +28,16 @@ namespace Assets.Scripts
         private void Update()
         {
             if (!canMove || !pathPlanner.IsReady) return;
+            Move();
+
             
-            distanceTravelledOnThisPath += moveSpeed * Time.deltaTime;
+            velocityMultiplier += Time.deltaTime;
+            velocityMultiplier = Math.Min(velocityMultiplier, 1.0f);
+        }
+
+        private void Move()
+        {
+            distanceTravelledOnThisPath += moveSpeed * Time.deltaTime * velocityMultiplier;
             transform.position = pathPlanner.GetPointAtDistance(distanceTravelledOnThisPath);
             transform.rotation = pathPlanner.GetRotationAtDistance(distanceTravelledOnThisPath);
         }
@@ -35,6 +45,10 @@ namespace Assets.Scripts
         public void SetCanMove(bool canMove)
         {
             this.canMove = canMove;
+            if (!canMove)
+            {
+                velocityMultiplier = 0;
+            }
         }
 
         public void ResetDistanceTravelledOnThisPath()

@@ -1,6 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Threading;
+using Unity.VisualScripting;
 using UnityEngine;
 
 namespace Assets.Scripts
@@ -19,6 +21,15 @@ namespace Assets.Scripts
         [SerializeField]
         private bool drawGizmos;
 
+        private PathPlanner pathPlanner;
+
+        [SerializeField]
+        private string nameOfTheClosestObject;
+        
+        private void Start()
+        {
+            pathPlanner = GetComponent<PathPlanner>();
+        }
 
         public float GetDistanceToClosestObjectOnPath()
         {
@@ -26,18 +37,45 @@ namespace Assets.Scripts
             
 
             RaycastHit objectHit;
-            if (Physics.Raycast(sensorPosition.position, forward, out objectHit, 50))
+            var hits = Physics.RaycastAll(sensorPosition.position, forward, 50);
+
+            if (hits.Length == 0)
             {
-                var distance = Vector3.Distance(sensorPosition.position, objectHit.point);
-                Debug.DrawRay(sensorPosition.position,  forward * objectHit.distance, Color.red);
-                return distance;
+                Debug.DrawRay(sensorPosition.position, forward * 10, Color.blue);
+                return 100;
             }
 
+            var viableHits = hits.Where(hit => IsViableBarrier(hit.transform.parent.gameObject));
+            if (viableHits.Count() == 0)
+            {
+                Debug.DrawRay(sensorPosition.position, forward * 10, Color.blue);
+                return 100;
+            }
             
-            Debug.DrawRay(sensorPosition.position, forward * 10, Color.blue);
-            return 100;
+            var closest = viableHits.OrderBy(hit => Vector3.Distance(hit.point, sensorPosition.position)).First();
 
+            nameOfTheClosestObject = closest.transform.gameObject.name;
+            
+            Debug.DrawLine(sensorPosition.position, closest.point, Color.red);
+            return Vector3.Distance(closest.point, sensorPosition.position);
+        }
 
+        private bool IsViableBarrier(GameObject gameObject)
+        {
+            gameObject.TryGetComponent(out CrossroadBarrier barrier);
+            if (barrier != null)
+            {
+                var pathCreator = barrier.PathCreator;
+
+                // if (pathCreator != pathPlanner.CurrentPathCreator)
+                // {
+                //     Debug.Log($"My path creator is {pathPlanner.CurrentPathCreator.gameObject.name} \n Barrier's is {pathCreator.gameObject.name}");
+                // }
+                
+                return pathCreator == pathPlanner.CurrentPathCreator;
+            }
+
+            return true;
         }
     }
 }

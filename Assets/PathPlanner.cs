@@ -21,10 +21,16 @@ public class PathPlanner : MonoBehaviour
     private List<IRoadElement> roadElements;
 
     private float cumulativeLengthOfAlreadyFinishedPaths = 0;
-
-    [SerializeField]
+    
     private List<VertexPath> localPaths = new List<VertexPath>();
+    
+    [SerializeField]
+    private List<PathCreator> localPathCreators = new List<PathCreator>();
     private VertexPath currentPath;
+    private PathCreator pathCreator;
+    private PathCreator currentPathCreator;
+    
+    [SerializeField]
     private int currentPathIndex = 0;
     private Engine engine;
     private bool isReady = false;
@@ -34,6 +40,16 @@ public class PathPlanner : MonoBehaviour
     public bool IsReady
     {
         get => isReady;
+    }
+
+    // public VertexPath CurrentVertexPath
+    // {
+    //     get => currentPath;
+    // }
+    
+    public PathCreator CurrentPathCreator
+    {
+        get => currentPathCreator;
     }
 
     private void Awake()
@@ -100,6 +116,7 @@ public class PathPlanner : MonoBehaviour
             
             var pathCreator = currentRoadElement.GetPathCreatorToGetThrough(previousRoadElement, nextRoadElement);
             localPaths.Add(pathCreator.path);
+            localPathCreators.Add(pathCreator);
         }
     }
     
@@ -126,6 +143,7 @@ public class PathPlanner : MonoBehaviour
     private void ChangeToNextPath()
     {
         currentPath = localPaths[currentPathIndex];
+        currentPathCreator = localPathCreators[currentPathIndex];
         currentPathIndex++;
         if (currentPathIndex == roadElements.Count)
         {
@@ -134,5 +152,19 @@ public class PathPlanner : MonoBehaviour
 
         engine.ResetDistanceTravelledOnThisPath();
     }
-    
+
+    public bool IsCurrentOrNextPathCreator(PathCreator pathCreator)
+    {
+        if (currentPathCreator == pathCreator)
+        {
+            return true;
+        }
+
+        if (localPathCreators[currentPathIndex] == pathCreator)
+        {
+            return true;
+        }
+
+        return false;
+    }
 }
