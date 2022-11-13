@@ -18,7 +18,14 @@ namespace Assets.Scripts
         
         private PathPlanner pathPlanner;
         private bool canMove;
+        
+        [SerializeField]//TODO
         private float velocityMultiplier;
+
+        public float VelocityMultiplier
+        {
+            get => velocityMultiplier;
+        }
 
         private void Start()
         {

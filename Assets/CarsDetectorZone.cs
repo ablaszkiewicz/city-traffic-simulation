@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using PathCreation;
 using UnityEngine;
 
@@ -14,6 +15,9 @@ public class CarsDetectorZone : MonoBehaviour
 
     [SerializeField]
     private PathCreator pathCreator;
+
+    [SerializeField]
+    private bool firstCarIsMoving;
     
     private List<Car> carsInside = new List<Car>();
 
@@ -21,11 +25,18 @@ public class CarsDetectorZone : MonoBehaviour
     public Action OnFull;
     public Action OnEmpty;
 
+    public bool FirstCarIsMoving => firstCarIsMoving;
+
     private void Start()
     {
         renderer = GetComponent<MeshRenderer>();
     }
 
+    public void Update()
+    {
+        firstCarIsMoving = carsInside.Count >= 1 && carsInside[0].IsMoving;
+    }
+    
     private void OnTriggerEnter(Collider other)
     {
         if (other.gameObject.GetComponentInParent<Car>())
@@ -36,11 +47,6 @@ public class CarsDetectorZone : MonoBehaviour
             if (pathPlanner.IsCurrentOrNextPathCreator(pathCreator))
             {
                 carsInside.Add(other.gameObject.GetComponentInParent<Car>());
-            }
-            else
-            {
-                Debug.Log($"My path creator is {pathCreator.gameObject.name}");
-                Debug.Log($"Cars path creator is {pathPlanner.CurrentPathCreator.gameObject.name}");
             }
         }
         

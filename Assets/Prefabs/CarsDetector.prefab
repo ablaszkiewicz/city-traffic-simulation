@@ -30,7 +30,7 @@ Transform:
   m_GameObject: {fileID: 2126290220231920817}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 8, y: 1, z: 1}
+  m_LocalScale: {x: 4.7872, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 2126290220410615332}
@@ -129,6 +129,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   detectedMaterial: {fileID: 2100000, guid: 185da77223166e64093d4dc6adfb4b22, type: 2}
   idleMaterial: {fileID: 2100000, guid: e2d21ae0a03dc6448a75eebba7a9e3c8, type: 2}
+  pathCreator: {fileID: 0}
 --- !u!1 &2126290220410615333
 GameObject:
   m_ObjectHideFlags: 0

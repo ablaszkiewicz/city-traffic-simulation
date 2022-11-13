@@ -15,11 +15,18 @@ public class Car : MonoBehaviour
     private int id;
 
     private StateMachine stateMachine;
+    private Engine engine;
 
+    public bool IsMoving
+    {
+        get => engine.VelocityMultiplier > 0;
+    }
+    
     private void Start()
     {
         id = Random.Range(0, 100000);
         stateMachine = GetComponent<StateMachine>();
+        engine = GetComponent<Engine>();
     }
 
     public CarDto GenerateCarDto()
