@@ -18,7 +18,7 @@ public class CarsDetectorZone : MonoBehaviour
 
     [SerializeField]
     private bool firstCarIsMoving;
-    
+
     private List<Car> carsInside = new List<Car>();
 
     private MeshRenderer renderer;
@@ -36,20 +36,20 @@ public class CarsDetectorZone : MonoBehaviour
     {
         firstCarIsMoving = carsInside.Count >= 1 && carsInside[0].IsMoving;
     }
-    
+
     private void OnTriggerEnter(Collider other)
     {
         if (other.gameObject.GetComponentInParent<Car>())
         {
             var pathPlanner = other.gameObject.GetComponentInParent<PathPlanner>();
 
-            Debug.Log(pathPlanner.gameObject.name);
+            //Debug.Log(pathPlanner.gameObject.name);
             if (pathPlanner.IsCurrentOrNextPathCreator(pathCreator))
             {
                 carsInside.Add(other.gameObject.GetComponentInParent<Car>());
             }
         }
-        
+
         UpdateColor();
         FirePossibleEvents();
     }
@@ -65,7 +65,7 @@ public class CarsDetectorZone : MonoBehaviour
                 carsInside.Remove(other.gameObject.GetComponentInParent<Car>());
             }
         }
-        
+
         UpdateColor();
         FirePossibleEvents();
     }
