@@ -8,12 +8,13 @@ namespace Assets.Scripts
         private const float START_THRESHOLD = 1;
 
         private bool isBlocked = true;
-        private float initialDelay = 0.5f;
+        private float initialDelay;
         private float currentDelay = 0f;
 
-        public StoppedState(ProximitySensor proximitySensor, StateMachine stateMachine, Engine engine) : base(proximitySensor,
+        public StoppedState(ProximitySensor proximitySensor, StateMachine stateMachine, Engine engine, float initialDelay) : base(proximitySensor,
             stateMachine, engine)
         {
+            this.initialDelay = initialDelay;
         }
 
         public override void OnEnter()

@@ -10,30 +10,31 @@ public class PathPlanner : MonoBehaviour
 {
     [SerializeField]
     private bool destroyOnPathFinish;
-    
+
     [SerializeField]
     private List<IRoadElement> defaultStartingRoadElements;
-    
+
     [SerializeField]
     private List<IRoadElement> randomRoadElements = new List<IRoadElement>();
-    
+
     [SerializeField]
     private List<IRoadElement> roadElements;
 
     private float cumulativeLengthOfAlreadyFinishedPaths = 0;
-    
+
     private List<VertexPath> localPaths = new List<VertexPath>();
-    
+
     [SerializeField]
     private List<PathCreator> localPathCreators = new List<PathCreator>();
     private VertexPath currentPath;
     private PathCreator pathCreator;
     private PathCreator currentPathCreator;
-    
+
     [SerializeField]
     private int currentPathIndex = 0;
     private Engine engine;
     private bool isReady = false;
+    private bool destroyOnNextChange = false;
 
     private System.Random random = new System.Random();
 
@@ -46,7 +47,7 @@ public class PathPlanner : MonoBehaviour
     // {
     //     get => currentPath;
     // }
-    
+
     public PathCreator CurrentPathCreator
     {
         get => currentPathCreator;
@@ -69,7 +70,7 @@ public class PathPlanner : MonoBehaviour
         ChangeToNextPath();
         isReady = true;
     }
-    
+
     public void Initialize(List<IRoadElement> startingRoadElements)
     {
         RandomizePath(startingRoadElements);
@@ -81,12 +82,12 @@ public class PathPlanner : MonoBehaviour
     private void RandomizePath(List<IRoadElement> startingRoadElements)
     {
         var startingRoadElement = startingRoadElements[random.Next(startingRoadElements.Count)];
-        
+
         randomRoadElements.Add(startingRoadElement);
         var currentElement = startingRoadElement;
         IRoadElement previous = null;
-        
-        while(true)
+
+        while (true)
         {
             var possibleNextRoadElements = currentElement.GetNextRoadElements(previous);
 
@@ -94,32 +95,32 @@ public class PathPlanner : MonoBehaviour
             {
                 return;
             }
-            
+
             int randomIndex = random.Next(possibleNextRoadElements.Count);
             previous = currentElement;
             currentElement = possibleNextRoadElements[randomIndex];
             randomRoadElements.Add(currentElement);
         }
-        
+
     }
-    
+
     private void InitializeLocalPaths()
     {
         roadElements = randomRoadElements;
-        
+
         for (int i = 0; i < roadElements.Count; i++)
         {
             var previousRoadElement = i == 0 ? null : roadElements[i - 1];
             var currentRoadElement = roadElements[i];
             var nextRoadElement = i >= roadElements.Count - 1 ? null : roadElements[i + 1];
-            
-            
+
+
             var pathCreator = currentRoadElement.GetPathCreatorToGetThrough(previousRoadElement, nextRoadElement);
             localPaths.Add(pathCreator.path);
             localPathCreators.Add(pathCreator);
         }
     }
-    
+
     public Vector3 GetPointAtDistance(float distance)
     {
         if (distance > currentPath.length)
@@ -128,13 +129,13 @@ public class PathPlanner : MonoBehaviour
             {
                 Destroy(gameObject);
             }
-            
+
             ChangeToNextPath();
             return currentPath.GetPointAtDistance(0);
         }
         return currentPath.GetPointAtDistance(distance);
     }
-    
+
     public Quaternion GetRotationAtDistance(float distance)
     {
         return currentPath.GetRotationAtDistance(distance);
@@ -142,12 +143,18 @@ public class PathPlanner : MonoBehaviour
 
     private void ChangeToNextPath()
     {
+        if (destroyOnNextChange)
+        {
+            Destroy(gameObject);
+            return;
+        }
+
         currentPath = localPaths[currentPathIndex];
         currentPathCreator = localPathCreators[currentPathIndex];
         currentPathIndex++;
         if (currentPathIndex == roadElements.Count)
         {
-            currentPathIndex = 0;
+            destroyOnNextChange = true;
         }
 
         engine.ResetDistanceTravelledOnThisPath();

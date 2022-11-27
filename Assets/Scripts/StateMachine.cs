@@ -9,12 +9,18 @@ namespace Assets.Scripts
         private Engine engine;
         private State currentStateEnum;
 
+        [SerializeField]
+        private SettingsScriptableObject settingsScriptableObject;
+
         public State CurrentState => currentStateEnum;
+        private CruiseState cruiseState;
+        private StoppedState stoppedState;
 
         private void Start()
         {
             proximitySensor = GetComponent<ProximitySensor>();
             engine = GetComponent<Engine>();
+            InitializeStates();
             ChangeState(State.CRUISE);
         }
 
@@ -23,18 +29,25 @@ namespace Assets.Scripts
             state.Tick();
         }
 
+        private void InitializeStates()
+        {
+            cruiseState = new CruiseState(proximitySensor, this, engine);
+            stoppedState = new StoppedState(proximitySensor, this, engine, settingsScriptableObject.GetDelay());
+        }
+
         public void ChangeState(State newState)
         {
             switch (newState)
             {
                 case State.CRUISE:
-                    state =  new CruiseState(proximitySensor, this, engine);
+                    state = cruiseState;
                     break;
                 case State.STOPPED:
-                    state = new StoppedState(proximitySensor, this, engine);
+                    state = stoppedState;
                     break;
             }
 
+            state.OnEnter();
             currentStateEnum = newState;
         }
     }

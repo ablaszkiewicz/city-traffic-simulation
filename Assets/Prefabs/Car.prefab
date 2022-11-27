@@ -191,6 +191,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 67208706a809083439c71d02ec2de601, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  settingsScriptableObject: {fileID: 11400000, guid: 81260505e2045441e8f11f031d951ccf, type: 2}
 --- !u!114 &739169608486648384
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -207,6 +208,7 @@ MonoBehaviour:
   numberOfDetectors: 5
   detectorsSpread: 10
   drawGizmos: 1
+  nameOfTheClosestObject: 
 --- !u!114 &739169608486648391
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -221,30 +223,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   distanceTravelledOnThisPath: 0
   moveSpeed: 20
-  breakingCurve:
-    serializedVersion: 2
-    m_Curve:
-    - serializedVersion: 3
-      time: 0
-      value: 0
-      inSlope: 1
-      outSlope: 1
-      tangentMode: 34
-      weightedMode: 0
-      inWeight: 0
-      outWeight: 0
-    - serializedVersion: 3
-      time: 1
-      value: 1
-      inSlope: 1
-      outSlope: 1
-      tangentMode: 34
-      weightedMode: 0
-      inWeight: 0
-      outWeight: 0
-    m_PreInfinity: 2
-    m_PostInfinity: 2
-    m_RotationOrder: 4
+  velocityMultiplier: 0
 --- !u!114 &739169608486648389
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -261,6 +240,8 @@ MonoBehaviour:
   defaultStartingRoadElements: []
   randomRoadElements: []
   roadElements: []
+  localPathCreators: []
+  currentPathIndex: 0
 --- !u!1 &739169608540557729
 GameObject:
   m_ObjectHideFlags: 0

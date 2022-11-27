@@ -9,16 +9,13 @@ namespace Assets.Scripts
     {
         [SerializeField]
         private float distanceTravelledOnThisPath = 0;
-        
+
         [SerializeField]
         private float moveSpeed;
 
-        [SerializeField]
-        private AnimationCurve breakingCurve;
-        
         private PathPlanner pathPlanner;
         private bool canMove;
-        
+
         [SerializeField]//TODO
         private float velocityMultiplier;
 
@@ -31,13 +28,13 @@ namespace Assets.Scripts
         {
             pathPlanner = GetComponent<PathPlanner>();
         }
-        
+
         private void Update()
         {
             if (!canMove || !pathPlanner.IsReady) return;
             Move();
 
-            
+
             velocityMultiplier += Time.deltaTime;
             velocityMultiplier = Math.Min(velocityMultiplier, 1.0f);
         }
