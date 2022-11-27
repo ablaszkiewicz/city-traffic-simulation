@@ -10,7 +10,7 @@ using UnityEngine.Networking;
 
 namespace Assets.Scripts
 {
-    public class JsonSerializer: MonoBehaviour
+    public class JsonSerializer : MonoBehaviour
     {
         private StreamWriter streamWriter;
         private int frameCount = 0;
@@ -23,20 +23,24 @@ namespace Assets.Scripts
         {
             simulationChunk = new SimulationChunkDto();
             simulationChunk.frames = new List<FrameDto>();
-            
-            streamWriter = new StreamWriter("C:/Users/Aleksander/Desktop/data.json");
-            
-            InvokeRepeating("SendSimulationData", 0, 0.1f);
-            
+
+            //streamWriter = new StreamWriter("C:/Users/Aleksander/Desktop/data.json");
+
+            //InvokeRepeating("SendSimulationData", 0, 1f);
+
         }
-        
+
         private void Update()
         {
 
             //if (simulationOver) return;
-            
+
             var frameDto = GenerateFrameDto();
-            simulationChunk.frames.Add(frameDto);
+            if (frameCount % 10 == 0)
+            {
+                simulationChunk.frames.Add(frameDto);
+
+            }
         }
 
         private FrameDto GenerateFrameDto()
@@ -44,10 +48,10 @@ namespace Assets.Scripts
             var frame = new FrameDto();
             frame.frameNumber = frameCount;
             frame.cars = new List<CarDto>();
-            
+
             List<Car> cars = FindObjectsOfType<Car>().ToList();
-            
-            
+
+
             foreach (var car in cars)
             {
                 frame.cars.Add(car.GenerateCarDto());
@@ -59,41 +63,41 @@ namespace Assets.Scripts
 
         private void SendSimulationData()
         {
-            //StartCoroutine("SimluationChunkPostRequest");
+            StartCoroutine("SimluationChunkPostRequest");
             simulationChunk.frames.Clear();
         }
 
         private IEnumerator SimluationChunkPostRequest()
         {
             //Debug.Log("SENDING");
-            
+
             var request = new UnityWebRequest("https://ctsbackend.bieda.it/api/simulation", "POST");
             request.SetRequestHeader("Content-Type", "application/json");
             request.SetRequestHeader("ApiKey", "1234");
             byte[] data = Encoding.UTF8.GetBytes(JsonUtility.ToJson(simulationChunk));
             request.uploadHandler = new UploadHandlerRaw(data);
             yield return request.SendWebRequest();
-            
+
             Debug.Log("SENT");
         }
-        
+
         private IEnumerator ComputePostRequest()
         {
             Debug.Log("SENDING COMPUTE SIGNAL");
-            
-            var request = new UnityWebRequest("https://ctscompms.bieda.it/api/process?settings_hash=demo&map_hash=demo", "POST");
+
+            var request = new UnityWebRequest("https://ctscompms.bieda.it/api/process?settings_hash=biuro2137&map_hash=biuro2137", "POST");
             // request.SetRequestHeader("Content-Type", "application/json");
             // request.SetRequestHeader("ApiKey", "1234");
             // byte[] data = Encoding.UTF8.GetBytes(JsonUtility.ToJson(simulationChunk));
             // request.uploadHandler = new UploadHandlerRaw(data);
             yield return request.SendWebRequest();
-            
+
             Debug.Log("COMPUTED");
         }
         void OnApplicationQuit()
         {
-            streamWriter.Write(JsonUtility.ToJson(simulationChunk));
-            streamWriter.Close();
+            //streamWriter.Write(JsonUtility.ToJson(simulationChunk));
+            //streamWriter.Close();
 
             //StartCoroutine("ComputePostRequest");
         }

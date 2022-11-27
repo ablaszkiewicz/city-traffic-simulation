@@ -295,7 +295,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 408bd3eef2b06c44e9ea45ec81f68a87, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  spawnInterval: 1
+  minSpawnInterval: 3
+  maxSpawnInterval: 5
   carPrefab: {fileID: 739169608486648387, guid: 0e04b407f9b35954098893219cc821ae, type: 3}
 --- !u!1 &187043444
 GameObject:
@@ -411,7 +412,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 408bd3eef2b06c44e9ea45ec81f68a87, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  spawnInterval: 1
+  minSpawnInterval: 3
+  maxSpawnInterval: 5
   carPrefab: {fileID: 739169608486648387, guid: 0e04b407f9b35954098893219cc821ae, type: 3}
 --- !u!4 &191957031
 Transform:
@@ -685,11 +687,11 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 6304530366109408837, guid: 374afd5b60dc34f19b4e82037488a5b0, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -3.8257174
+      value: -3.8427958
       objectReference: {fileID: 0}
     - target: {fileID: 6304530366109408837, guid: 374afd5b60dc34f19b4e82037488a5b0, type: 3}
       propertyPath: m_LocalPosition.z
-      value: 7.6492043
+      value: 7.683361
       objectReference: {fileID: 0}
     - target: {fileID: 6304530366109408837, guid: 374afd5b60dc34f19b4e82037488a5b0, type: 3}
       propertyPath: m_LocalRotation.w
@@ -705,7 +707,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6304530366146353348, guid: 374afd5b60dc34f19b4e82037488a5b0, type: 3}
       propertyPath: m_LocalPosition.z
-      value: 6.4355183
+      value: 6.477438
       objectReference: {fileID: 0}
     - target: {fileID: 6304530366146353348, guid: 374afd5b60dc34f19b4e82037488a5b0, type: 3}
       propertyPath: m_LocalRotation.w
@@ -765,7 +767,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6304530367730939431, guid: 374afd5b60dc34f19b4e82037488a5b0, type: 3}
       propertyPath: m_LocalPosition.z
-      value: 8.894606
+      value: 8.92721
       objectReference: {fileID: 0}
     - target: {fileID: 6304530367730939431, guid: 374afd5b60dc34f19b4e82037488a5b0, type: 3}
       propertyPath: m_LocalRotation.w
@@ -807,7 +809,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 408bd3eef2b06c44e9ea45ec81f68a87, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  spawnInterval: 1
+  minSpawnInterval: 3
+  maxSpawnInterval: 5
   carPrefab: {fileID: 739169608486648387, guid: 0e04b407f9b35954098893219cc821ae, type: 3}
 --- !u!4 &503070583
 Transform:
@@ -2102,11 +2105,11 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 6304530366109408837, guid: 374afd5b60dc34f19b4e82037488a5b0, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -3.8261418
+      value: -3.8432202
       objectReference: {fileID: 0}
     - target: {fileID: 6304530366109408837, guid: 374afd5b60dc34f19b4e82037488a5b0, type: 3}
       propertyPath: m_LocalPosition.z
-      value: 7.576274
+      value: 7.5933523
       objectReference: {fileID: 0}
     - target: {fileID: 6304530366109408837, guid: 374afd5b60dc34f19b4e82037488a5b0, type: 3}
       propertyPath: m_LocalRotation.w
@@ -2118,7 +2121,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6304530366146353348, guid: 374afd5b60dc34f19b4e82037488a5b0, type: 3}
       propertyPath: m_LocalPosition.z
-      value: 6.4375696
+      value: 6.4794893
       objectReference: {fileID: 0}
     - target: {fileID: 6304530366146353348, guid: 374afd5b60dc34f19b4e82037488a5b0, type: 3}
       propertyPath: m_LocalRotation.w
@@ -2174,11 +2177,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6304530367730939431, guid: 374afd5b60dc34f19b4e82037488a5b0, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 2.5362766
+      value: 2.5444276
       objectReference: {fileID: 0}
     - target: {fileID: 6304530367730939431, guid: 374afd5b60dc34f19b4e82037488a5b0, type: 3}
       propertyPath: m_LocalPosition.z
-      value: 8.895096
+      value: 8.9277
       objectReference: {fileID: 0}
     - target: {fileID: 6304530367730939431, guid: 374afd5b60dc34f19b4e82037488a5b0, type: 3}
       propertyPath: m_LocalRotation.w
@@ -2535,7 +2538,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 408bd3eef2b06c44e9ea45ec81f68a87, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  spawnInterval: 1
+  minSpawnInterval: 3
+  maxSpawnInterval: 5
   carPrefab: {fileID: 739169608486648387, guid: 0e04b407f9b35954098893219cc821ae, type: 3}
 --- !u!4 &1829521293
 Transform:
