@@ -5,7 +5,7 @@ namespace Assets.Scripts
     public class CruiseState : AState
     {
         private const float STOP_THRESHOLD = 1;
-        
+
         public CruiseState(ProximitySensor proximitySensor, StateMachine stateMachine, Engine engine) : base(proximitySensor,
             stateMachine, engine)
         {
