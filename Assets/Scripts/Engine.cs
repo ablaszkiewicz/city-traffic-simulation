@@ -19,6 +19,15 @@ namespace Assets.Scripts
         [SerializeField]//TODO
         private float velocityMultiplier;
 
+        private Vector2 lastPosition;
+
+        private Vector2 velocityVector;
+
+        public Vector2 VelocityVector
+        {
+            get => velocityVector;
+        }
+
         public float VelocityMultiplier
         {
             get => velocityMultiplier;
@@ -31,6 +40,7 @@ namespace Assets.Scripts
 
         private void Update()
         {
+            ComputeVelocityVector();
             if (!canMove || !pathPlanner.IsReady) return;
             Move();
 
@@ -58,6 +68,13 @@ namespace Assets.Scripts
         public void ResetDistanceTravelledOnThisPath()
         {
             distanceTravelledOnThisPath = 0;
+        }
+
+        private void ComputeVelocityVector()
+        {
+            Vector2 currentPosition = transform.position;
+            velocityVector = currentPosition - lastPosition;
+            lastPosition = currentPosition;
         }
     }
 }

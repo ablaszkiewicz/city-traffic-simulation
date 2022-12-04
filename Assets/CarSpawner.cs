@@ -16,9 +16,22 @@ public class CarSpawner : MonoBehaviour
 
     [SerializeField]
     private GameObject carPrefab;
+
+    [SerializeField]
+    private List<string> carTags;
+
+    [SerializeField]
+    private Road finishRoad;
+
+    private PathFinder pathFinder;
+
+
+    [SerializeField]
+    private List<IRoadElement> computedPath;
     private void Start()
     {
         StartCoroutine("RepeatingCoroutine");
+        pathFinder = FindObjectOfType<PathFinder>();
     }
 
     private IEnumerator RepeatingCoroutine()
@@ -41,7 +54,13 @@ public class CarSpawner : MonoBehaviour
         var closest = FindClosestRoad();
         var car = Instantiate(carPrefab.gameObject, closest.GetPathCreators()[0].path.GetPoint(0), Quaternion.identity);
 
-        car.GetComponent<PathPlanner>().Initialize(new List<IRoadElement> { closest });
+        var path = pathFinder.GetPath(closest, finishRoad);
+
+        computedPath = path;
+
+        car.GetComponent<PathPlanner>().InitializeWithReadyPath(path);
+        //car.GetComponent<PathPlanner>().Initialize(new List<IRoadElement>() { closest });
+        car.GetComponent<Car>().Initialize(carTags);
     }
 
     private IRoadElement FindClosestRoad()

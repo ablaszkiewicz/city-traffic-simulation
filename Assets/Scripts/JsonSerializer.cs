@@ -18,6 +18,7 @@ namespace Assets.Scripts
         private SimulationChunkDto simulationChunk;
 
         private bool simulationOver = false;
+        private int rateLimitter = 0;
 
         private void Start()
         {
@@ -26,7 +27,7 @@ namespace Assets.Scripts
 
             //streamWriter = new StreamWriter("C:/Users/Aleksander/Desktop/data.json");
 
-            //InvokeRepeating("SendSimulationData", 0, 1f);
+            InvokeRepeating("SendSimulationData", 0, 1f);
 
         }
 
@@ -35,11 +36,11 @@ namespace Assets.Scripts
 
             //if (simulationOver) return;
 
-            var frameDto = GenerateFrameDto();
-            if (frameCount % 10 == 0)
+            rateLimitter++;
+            if (rateLimitter % 10 == 0)
             {
+                var frameDto = GenerateFrameDto();
                 simulationChunk.frames.Add(frameDto);
-
             }
         }
 
@@ -86,10 +87,6 @@ namespace Assets.Scripts
             Debug.Log("SENDING COMPUTE SIGNAL");
 
             var request = new UnityWebRequest("https://ctscompms.bieda.it/api/process?settings_hash=biuro2137&map_hash=biuro2137", "POST");
-            // request.SetRequestHeader("Content-Type", "application/json");
-            // request.SetRequestHeader("ApiKey", "1234");
-            // byte[] data = Encoding.UTF8.GetBytes(JsonUtility.ToJson(simulationChunk));
-            // request.uploadHandler = new UploadHandlerRaw(data);
             yield return request.SendWebRequest();
 
             Debug.Log("COMPUTED");

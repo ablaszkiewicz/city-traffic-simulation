@@ -16,12 +16,14 @@ public class Car : MonoBehaviour
 
     private StateMachine stateMachine;
     private Engine engine;
+    [SerializeField]
+    private List<string> tags;
 
     public bool IsMoving
     {
         get => engine.VelocityMultiplier > 0;
     }
-    
+
     private void Start()
     {
         id = Random.Range(0, 100000);
@@ -36,7 +38,14 @@ public class Car : MonoBehaviour
         dto.position.x = transform.position.x;
         dto.position.y = transform.position.z;
         dto.state = stateMachine.CurrentState.ToString();
+        dto.tags = tags;
+        dto.velocity = engine.VelocityVector;
 
         return dto;
+    }
+
+    public void Initialize(List<string> tags)
+    {
+        this.tags = tags;
     }
 }

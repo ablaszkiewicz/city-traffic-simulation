@@ -63,6 +63,14 @@ public class PathPlanner : MonoBehaviour
         // Invoke("InitializeWithDefaultRoadElements", 1);
     }
 
+    public void InitializeWithReadyPath(List<IRoadElement> path)
+    {
+        this.randomRoadElements = path;
+        InitializeLocalPaths();
+        ChangeToNextPath();
+        isReady = true;
+    }
+
     private void InitializeWithDefaultRoadElements()
     {
         RandomizePath(defaultStartingRoadElements);
