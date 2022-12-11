@@ -15,6 +15,11 @@ public class PathFinder : MonoBehaviour
     public List<IRoadElement> GetPath(IRoadElement start, IRoadElement end)
     {
         var path = GetPathRecursive(null, start, end, new List<IRoadElement>());
+
+        if (path == null)
+        {
+            throw new System.Exception("Path not found");
+        }
         path.Insert(0, start);
         return path;
     }

@@ -179,6 +179,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   id: 0
+  tags: []
 --- !u!114 &739169608486648390
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -222,7 +223,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   distanceTravelledOnThisPath: 0
-  moveSpeed: 20
+  moveSpeed: 15
   velocityMultiplier: 0
 --- !u!114 &739169608486648389
 MonoBehaviour:
@@ -242,6 +243,7 @@ MonoBehaviour:
   roadElements: []
   localPathCreators: []
   currentPathIndex: 0
+  destroyOnNextChange: 0
 --- !u!1 &739169608540557729
 GameObject:
   m_ObjectHideFlags: 0

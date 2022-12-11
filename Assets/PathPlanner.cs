@@ -34,6 +34,7 @@ public class PathPlanner : MonoBehaviour
     private int currentPathIndex = 0;
     private Engine engine;
     private bool isReady = false;
+    [SerializeField]
     private bool destroyOnNextChange = false;
 
     private System.Random random = new System.Random();
@@ -66,7 +67,11 @@ public class PathPlanner : MonoBehaviour
     public void InitializeWithReadyPath(List<IRoadElement> path)
     {
         this.randomRoadElements = path;
-        InitializeLocalPaths();
+        try
+        {
+            InitializeLocalPaths();
+        }
+        catch (Exception e) { }
         ChangeToNextPath();
         isReady = true;
     }
@@ -95,7 +100,7 @@ public class PathPlanner : MonoBehaviour
         var currentElement = startingRoadElement;
         IRoadElement previous = null;
 
-        while (true)
+        while (true && randomRoadElements.Count < 100)
         {
             var possibleNextRoadElements = currentElement.GetNextRoadElements(previous);
 
@@ -109,7 +114,6 @@ public class PathPlanner : MonoBehaviour
             currentElement = possibleNextRoadElements[randomIndex];
             randomRoadElements.Add(currentElement);
         }
-
     }
 
     private void InitializeLocalPaths()
@@ -133,7 +137,7 @@ public class PathPlanner : MonoBehaviour
     {
         if (distance > currentPath.length)
         {
-            if (currentPath == localPaths[^1] && destroyOnPathFinish)
+            if (currentPathIndex == localPaths.Count && destroyOnPathFinish)
             {
                 Destroy(gameObject);
             }
@@ -153,6 +157,7 @@ public class PathPlanner : MonoBehaviour
     {
         if (destroyOnNextChange)
         {
+            Debug.Log("Destroying");
             Destroy(gameObject);
             return;
         }

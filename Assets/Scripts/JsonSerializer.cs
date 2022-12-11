@@ -7,6 +7,7 @@ using System.Text;
 using Assets.Scripts.DTOs;
 using UnityEngine;
 using UnityEngine.Networking;
+using PathCreation;
 
 namespace Assets.Scripts
 {
@@ -16,9 +17,12 @@ namespace Assets.Scripts
         private int frameCount = 0;
         private bool firstLine = true;
         private SimulationChunkDto simulationChunk;
+        private List<PathCreator> roadsPathCreators;
 
         private bool simulationOver = false;
-        private int rateLimitter = 0;
+        private int rateLimitterCounter = 0;
+        private int rateLimitter = 10;
+        private MapDto mapDto;
 
         private void Start()
         {
@@ -28,7 +32,9 @@ namespace Assets.Scripts
             //streamWriter = new StreamWriter("C:/Users/Aleksander/Desktop/data.json");
 
             InvokeRepeating("SendSimulationData", 0, 1f);
-
+            roadsPathCreators = FindObjectsOfType<PathCreator>().ToList();
+            mapDto = SerializeRoads();
+            StartCoroutine("SendMapDtoPostRequest");
         }
 
         private void Update()
@@ -36,11 +42,12 @@ namespace Assets.Scripts
 
             //if (simulationOver) return;
 
-            rateLimitter++;
-            if (rateLimitter % 10 == 0)
+            rateLimitterCounter++;
+            if (rateLimitterCounter % rateLimitter == 0)
             {
                 var frameDto = GenerateFrameDto();
                 simulationChunk.frames.Add(frameDto);
+
             }
         }
 
@@ -68,6 +75,20 @@ namespace Assets.Scripts
             simulationChunk.frames.Clear();
         }
 
+        private IEnumerator SendMapDtoPostRequest()
+        {
+            //Debug.Log("SENDING");
+
+            var request = new UnityWebRequest("https://ctsbackend.bieda.it/api/maps", "POST");
+            request.SetRequestHeader("Content-Type", "application/json");
+            request.SetRequestHeader("ApiKey", "1234");
+            byte[] data = Encoding.UTF8.GetBytes(JsonUtility.ToJson(mapDto));
+            request.uploadHandler = new UploadHandlerRaw(data);
+            yield return request.SendWebRequest();
+
+            Debug.Log("SENT MAP");
+        }
+
         private IEnumerator SimluationChunkPostRequest()
         {
             //Debug.Log("SENDING");
@@ -86,7 +107,7 @@ namespace Assets.Scripts
         {
             Debug.Log("SENDING COMPUTE SIGNAL");
 
-            var request = new UnityWebRequest("https://ctscompms.bieda.it/api/process?settings_hash=biuro2137&map_hash=biuro2137", "POST");
+            var request = new UnityWebRequest("https://ctscompms.bieda.it/api/process?settings_hash=phantomTraffic1&map_hash=phantomTraffic1", "POST");
             yield return request.SendWebRequest();
 
             Debug.Log("COMPUTED");
@@ -97,6 +118,31 @@ namespace Assets.Scripts
             //streamWriter.Close();
 
             //StartCoroutine("ComputePostRequest");
+        }
+
+        private MapDto SerializeRoads()
+        {
+            var map = new MapDto();
+
+            roadsPathCreators.ForEach(pathCreator =>
+            {
+                var numberOfPoints = pathCreator.bezierPath.NumPoints;
+                var points = new List<Vector2>();
+
+                for (int i = 0; i < numberOfPoints; i++)
+                {
+                    var point = pathCreator.bezierPath.GetPoint(i);
+                    var transformed = pathCreator.transform.TransformPoint(point);
+                    points.Add(new Vector2(transformed.x, transformed.z));
+                }
+
+                var road = new RoadDto();
+                road.points = points;
+                map.roads.Add(road);
+            });
+
+
+            return map;
         }
     }
 }

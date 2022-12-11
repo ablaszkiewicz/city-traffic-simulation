@@ -25,7 +25,7 @@ namespace Assets.Scripts
 
         [SerializeField]
         private string nameOfTheClosestObject;
-        
+
         private void Start()
         {
             pathPlanner = GetComponent<PathPlanner>();
@@ -33,8 +33,9 @@ namespace Assets.Scripts
 
         public float GetDistanceToClosestObjectOnPath()
         {
+            //shoot 45 degree angle left
             Vector3 forward = sensorPosition.TransformDirection(Vector3.forward);
-            
+
 
             RaycastHit objectHit;
             var hits = Physics.RaycastAll(sensorPosition.position, forward, 50);
@@ -51,11 +52,11 @@ namespace Assets.Scripts
                 Debug.DrawRay(sensorPosition.position, forward * 10, Color.blue);
                 return 100;
             }
-            
+
             var closest = viableHits.OrderBy(hit => Vector3.Distance(hit.point, sensorPosition.position)).First();
 
             nameOfTheClosestObject = closest.transform.gameObject.name;
-            
+
             Debug.DrawLine(sensorPosition.position, closest.point, Color.red);
             return Vector3.Distance(closest.point, sensorPosition.position);
         }
@@ -71,7 +72,7 @@ namespace Assets.Scripts
                 // {
                 //     Debug.Log($"My path creator is {pathPlanner.CurrentPathCreator.gameObject.name} \n Barrier's is {pathCreator.gameObject.name}");
                 // }
-                
+
                 return pathCreator == pathPlanner.CurrentPathCreator;
             }
 
