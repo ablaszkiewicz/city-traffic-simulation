@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 705507994}
-  m_IndirectSpecularColor: {r: 0.44657898, g: 0.4964133, b: 0.5748178, a: 1}
+  m_IndirectSpecularColor: {r: 0.44657815, g: 0.49641192, b: 0.57481617, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -139,7 +139,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &95746776
 Transform:
   m_ObjectHideFlags: 0
@@ -192,7 +192,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 171663915}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -15.25, y: 0, z: -1.25}
+  m_LocalPosition: {x: -30.68, y: 0, z: -1.25}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -212,8 +212,16 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 408bd3eef2b06c44e9ea45ec81f68a87, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  spawnInterval: 1
+  spawnLimit: 1000
+  minSpawnInterval: 1
+  maxSpawnInterval: 4
+  randomizeCarsPath: 1
+  useForcedPath: 0
   carPrefab: {fileID: 739169608486648387, guid: 0e04b407f9b35954098893219cc821ae, type: 3}
+  carTags: []
+  finishRoad: {fileID: 0}
+  forcedPath: []
+  computedPath: []
 --- !u!1 &187043444
 GameObject:
   m_ObjectHideFlags: 0
@@ -261,8 +269,8 @@ MonoBehaviour:
   editorData:
     _bezierPath:
       points:
-      - {x: -5, y: 0, z: 0}
-      - {x: -1.1912637, y: 0, z: 0.00065660477}
+      - {x: -20.068964, y: 0.00000044909012, z: -0.0000019073486}
+      - {x: -16.260227, y: 0.00000044909012, z: 0.0006546974}
       - {x: 0.7383976, y: 0, z: 0.08388233}
       - {x: 5, y: 0, z: 0}
       isClosed: 0
@@ -299,6 +307,89 @@ MonoBehaviour:
     showNormalsHelpInfo: 0
     tabIndex: 0
   initialized: 1
+--- !u!1 &292215006
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 292215007}
+  - component: {fileID: 292215009}
+  - component: {fileID: 292215008}
+  m_Layer: 0
+  m_Name: Cube
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &292215007
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 292215006}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 0.25451, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 1617310524}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!23 &292215008
+MeshRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 292215006}
+  m_Enabled: 1
+  m_CastShadows: 1
+  m_ReceiveShadows: 1
+  m_DynamicOccludee: 1
+  m_StaticShadowCaster: 0
+  m_MotionVectors: 1
+  m_LightProbeUsage: 1
+  m_ReflectionProbeUsage: 1
+  m_RayTracingMode: 2
+  m_RayTraceProcedural: 0
+  m_RenderingLayerMask: 1
+  m_RendererPriority: 0
+  m_Materials:
+  - {fileID: 10303, guid: 0000000000000000f000000000000000, type: 0}
+  m_StaticBatchInfo:
+    firstSubMesh: 0
+    subMeshCount: 0
+  m_StaticBatchRoot: {fileID: 0}
+  m_ProbeAnchor: {fileID: 0}
+  m_LightProbeVolumeOverride: {fileID: 0}
+  m_ScaleInLightmap: 1
+  m_ReceiveGI: 1
+  m_PreserveUVs: 0
+  m_IgnoreNormalsForChartDetection: 0
+  m_ImportantGI: 0
+  m_StitchLightmapSeams: 1
+  m_SelectedEditorRenderState: 3
+  m_MinimumChartSize: 4
+  m_AutoUVMaxDistance: 0.5
+  m_AutoUVMaxAngle: 89
+  m_LightmapParameters: {fileID: 0}
+  m_SortingLayerID: 0
+  m_SortingLayer: 0
+  m_SortingOrder: 0
+  m_AdditionalVertexStreams: {fileID: 0}
+--- !u!33 &292215009
+MeshFilter:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 292215006}
+  m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
 --- !u!1 &319011643
 GameObject:
   m_ObjectHideFlags: 0
@@ -492,8 +583,16 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 408bd3eef2b06c44e9ea45ec81f68a87, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  spawnInterval: 1
+  spawnLimit: 1000
+  minSpawnInterval: 1
+  maxSpawnInterval: 4
+  randomizeCarsPath: 1
+  useForcedPath: 0
   carPrefab: {fileID: 739169608486648387, guid: 0e04b407f9b35954098893219cc821ae, type: 3}
+  carTags: []
+  finishRoad: {fileID: 0}
+  forcedPath: []
+  computedPath: []
 --- !u!4 &503070583
 Transform:
   m_ObjectHideFlags: 0
@@ -502,7 +601,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 503070581}
   m_LocalRotation: {x: -0, y: 1, z: -0, w: 0.000000104308114}
-  m_LocalPosition: {x: 15.250003, y: 0, z: 1.250001}
+  m_LocalPosition: {x: 30.19, y: 0, z: 1.25}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -559,8 +658,8 @@ MonoBehaviour:
       points:
       - {x: -5, y: 0, z: 0}
       - {x: -1.1912637, y: 0, z: 0.00065660477}
-      - {x: 0.7383976, y: 0, z: 0.08388233}
-      - {x: 5, y: 0, z: 0}
+      - {x: 15.568703, y: -0.00000044197753, z: 0.083880424}
+      - {x: 19.830305, y: -0.00000044197753, z: -0.0000019073486}
       isClosed: 0
       space: 0
       controlMode: 1
@@ -980,8 +1079,8 @@ MonoBehaviour:
   editorData:
     _bezierPath:
       points:
-      - {x: -5, y: 0, z: 0}
-      - {x: -1.1912637, y: 0, z: 0.00065660477}
+      - {x: -19.95836, y: 0, z: 0}
+      - {x: -16.149624, y: 0, z: 0.00065660477}
       - {x: 0.7383976, y: 0, z: 0.08388233}
       - {x: 5, y: 0, z: 0}
       isClosed: 0
@@ -1082,8 +1181,8 @@ MonoBehaviour:
       points:
       - {x: -5, y: 0, z: 0}
       - {x: -1.1912637, y: 0, z: 0.00065660477}
-      - {x: 0.7383976, y: 0, z: 0.08388233}
-      - {x: 5, y: 0, z: 0}
+      - {x: 15.842768, y: 0, z: 0.08388233}
+      - {x: 20.10437, y: 0, z: 0}
       isClosed: 0
       space: 0
       controlMode: 1
@@ -1227,8 +1326,8 @@ MonoBehaviour:
       points:
       - {x: -5, y: 0, z: 0}
       - {x: -1.1912637, y: 0, z: 0.00065660477}
-      - {x: 0.7383976, y: 0, z: 0.08388233}
-      - {x: 5, y: 0, z: 0}
+      - {x: 15.768404, y: -0.0000004479291, z: 0.08388424}
+      - {x: 20.030006, y: -0.0000004479291, z: 0.0000019073486}
       isClosed: 0
       space: 0
       controlMode: 1
@@ -1323,6 +1422,61 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 97efec608aa73ca4ebb6b40b7faa3efc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!1 &1332759309
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1332759311}
+  - component: {fileID: 1332759310}
+  m_Layer: 0
+  m_Name: CarSpawner (2)
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &1332759310
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1332759309}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 408bd3eef2b06c44e9ea45ec81f68a87, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  spawnLimit: 1000
+  minSpawnInterval: 1
+  maxSpawnInterval: 4
+  randomizeCarsPath: 1
+  useForcedPath: 0
+  carPrefab: {fileID: 739169608486648387, guid: 0e04b407f9b35954098893219cc821ae, type: 3}
+  carTags: []
+  finishRoad: {fileID: 0}
+  forcedPath: []
+  computedPath: []
+--- !u!4 &1332759311
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1332759309}
+  m_LocalRotation: {x: -0, y: 0.70710677, z: -0, w: 0.7071068}
+  m_LocalPosition: {x: -1.4949832, y: 0, z: 30.435005}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children:
+  - {fileID: 1858543728}
+  m_Father: {fileID: 0}
+  m_RootOrder: 6
+  m_LocalEulerAnglesHint: {x: 0, y: 90, z: 0}
 --- !u!1 &1383613360
 GameObject:
   m_ObjectHideFlags: 0
@@ -1648,8 +1802,8 @@ MonoBehaviour:
       points:
       - {x: -5, y: 0, z: 0}
       - {x: -1.1912637, y: 0, z: 0.00065660477}
-      - {x: 0.7383976, y: 0, z: 0.08388233}
-      - {x: 5, y: 0, z: 0}
+      - {x: 15.594116, y: 0, z: 0.08389957}
+      - {x: 19.855719, y: 0, z: 0.000017236856}
       isClosed: 0
       space: 0
       controlMode: 1
@@ -1689,6 +1843,61 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 1300235310548537286, guid: b2247db8f7fbb464fbf904a62a6e0f46, type: 3}
   m_PrefabInstance: {fileID: 1300235311158693274}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &1617310522
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1617310524}
+  - component: {fileID: 1617310523}
+  m_Layer: 0
+  m_Name: CarSpawner (3)
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &1617310523
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1617310522}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 408bd3eef2b06c44e9ea45ec81f68a87, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  spawnLimit: 1000
+  minSpawnInterval: 1
+  maxSpawnInterval: 4
+  randomizeCarsPath: 1
+  useForcedPath: 0
+  carPrefab: {fileID: 739169608486648387, guid: 0e04b407f9b35954098893219cc821ae, type: 3}
+  carTags: []
+  finishRoad: {fileID: 0}
+  forcedPath: []
+  computedPath: []
+--- !u!4 &1617310524
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1617310522}
+  m_LocalRotation: {x: -0, y: 0.7071069, z: -0, w: -0.7071067}
+  m_LocalPosition: {x: 1.0049787, y: 0, z: -30.435001}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children:
+  - {fileID: 292215007}
+  m_Father: {fileID: 0}
+  m_RootOrder: 7
+  m_LocalEulerAnglesHint: {x: 0, y: 270, z: 0}
 --- !u!1 &1671198002
 GameObject:
   m_ObjectHideFlags: 0
@@ -1736,8 +1945,8 @@ MonoBehaviour:
   editorData:
     _bezierPath:
       points:
-      - {x: -5, y: 0, z: 0}
-      - {x: -1.1912637, y: 0, z: 0.00065660477}
+      - {x: -19.89108, y: 0, z: -0.000017277958}
+      - {x: -16.082344, y: 0, z: 0.0006393267}
       - {x: 0.7383976, y: 0, z: 0.08388233}
       - {x: 5, y: 0, z: 0}
       isClosed: 0
@@ -1881,8 +2090,8 @@ MonoBehaviour:
   editorData:
     _bezierPath:
       points:
-      - {x: -5, y: 0, z: 0}
-      - {x: -1.1912637, y: 0, z: 0.00065660477}
+      - {x: -19.9915, y: 0.00000044678154, z: 0.0000019073486}
+      - {x: -16.182764, y: 0.00000044678154, z: 0.0006585121}
       - {x: 0.7383976, y: 0, z: 0.08388233}
       - {x: 5, y: 0, z: 0}
       isClosed: 0
@@ -1919,6 +2128,89 @@ MonoBehaviour:
     showNormalsHelpInfo: 0
     tabIndex: 0
   initialized: 1
+--- !u!1 &1858543727
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1858543728}
+  - component: {fileID: 1858543730}
+  - component: {fileID: 1858543729}
+  m_Layer: 0
+  m_Name: Cube
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1858543728
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1858543727}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 0.25451, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 1332759311}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!23 &1858543729
+MeshRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1858543727}
+  m_Enabled: 1
+  m_CastShadows: 1
+  m_ReceiveShadows: 1
+  m_DynamicOccludee: 1
+  m_StaticShadowCaster: 0
+  m_MotionVectors: 1
+  m_LightProbeUsage: 1
+  m_ReflectionProbeUsage: 1
+  m_RayTracingMode: 2
+  m_RayTraceProcedural: 0
+  m_RenderingLayerMask: 1
+  m_RendererPriority: 0
+  m_Materials:
+  - {fileID: 10303, guid: 0000000000000000f000000000000000, type: 0}
+  m_StaticBatchInfo:
+    firstSubMesh: 0
+    subMeshCount: 0
+  m_StaticBatchRoot: {fileID: 0}
+  m_ProbeAnchor: {fileID: 0}
+  m_LightProbeVolumeOverride: {fileID: 0}
+  m_ScaleInLightmap: 1
+  m_ReceiveGI: 1
+  m_PreserveUVs: 0
+  m_IgnoreNormalsForChartDetection: 0
+  m_ImportantGI: 0
+  m_StitchLightmapSeams: 1
+  m_SelectedEditorRenderState: 3
+  m_MinimumChartSize: 4
+  m_AutoUVMaxDistance: 0.5
+  m_AutoUVMaxAngle: 89
+  m_LightmapParameters: {fileID: 0}
+  m_SortingLayerID: 0
+  m_SortingLayer: 0
+  m_SortingOrder: 0
+  m_AdditionalVertexStreams: {fileID: 0}
+--- !u!33 &1858543730
+MeshFilter:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1858543727}
+  m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
 --- !u!1001 &1300235311158693274
 PrefabInstance:
   m_ObjectHideFlags: 0
