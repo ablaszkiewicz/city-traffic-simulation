@@ -7,7 +7,7 @@ namespace Assets.Scripts.DTOs
     [Serializable]
     public class MapDto
     {
-        public string hash = "roundabout";
+        public string hash = "crossroad";
         public List<RoadDto> roads = new List<RoadDto>();
     }
 }
