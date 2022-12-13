@@ -10,7 +10,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: f96932194eb8d46c38c12794e959ae54, type: 3}
-  m_Name: MediumSettings
+  m_Name: SlowSettings
   m_EditorClassIdentifier: 
   initialDelayCurve:
     serializedVersion: 2
@@ -18,17 +18,17 @@ MonoBehaviour:
     - serializedVersion: 3
       time: 0.0083351135
       value: 0.00027024746
-      inSlope: 1.0316368
-      outSlope: 1.0316368
+      inSlope: 3.060309
+      outSlope: 3.060309
       tangentMode: 34
       weightedMode: 0
       inWeight: 0
       outWeight: 0.33333334
     - serializedVersion: 3
-      time: 0.49738157
-      value: 0.5047886
-      inSlope: -0.0012030005
-      outSlope: -0.0012030005
+      time: 0.49676633
+      value: 1.4950206
+      inSlope: 0.0046010017
+      outSlope: 0.0046010017
       tangentMode: 34
       weightedMode: 0
       inWeight: 0.33333334

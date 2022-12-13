@@ -6,8 +6,8 @@ namespace Assets.Scripts.DTOs
     [Serializable]
     public class SimulationChunkDto
     {
-        public string settingsHash = "random";
-        public string mapHash = "roundabout";
+        public string settingsHash = "asd";
+        public string mapHash = "asd";
         public string runId = "1";
         public List<FrameDto> frames = new List<FrameDto>();
     }

@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 705507994}
-  m_IndirectSpecularColor: {r: 0.44657815, g: 0.49641192, b: 0.57481617, a: 1}
+  m_IndirectSpecularColor: {r: 0.44657898, g: 0.4964133, b: 0.5748178, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -139,7 +139,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &95746776
 Transform:
   m_ObjectHideFlags: 0
@@ -213,8 +213,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   spawnLimit: 1000
-  minSpawnInterval: 1
-  maxSpawnInterval: 4
+  minSpawnInterval: 0.5
+  maxSpawnInterval: 2
   randomizeCarsPath: 1
   useForcedPath: 0
   carPrefab: {fileID: 739169608486648387, guid: 0e04b407f9b35954098893219cc821ae, type: 3}
@@ -584,8 +584,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   spawnLimit: 1000
-  minSpawnInterval: 1
-  maxSpawnInterval: 4
+  minSpawnInterval: 0.5
+  maxSpawnInterval: 2
   randomizeCarsPath: 1
   useForcedPath: 0
   carPrefab: {fileID: 739169608486648387, guid: 0e04b407f9b35954098893219cc821ae, type: 3}
@@ -1452,8 +1452,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   spawnLimit: 1000
-  minSpawnInterval: 1
-  maxSpawnInterval: 4
+  minSpawnInterval: 0.5
+  maxSpawnInterval: 2
   randomizeCarsPath: 1
   useForcedPath: 0
   carPrefab: {fileID: 739169608486648387, guid: 0e04b407f9b35954098893219cc821ae, type: 3}
@@ -1873,8 +1873,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   spawnLimit: 1000
-  minSpawnInterval: 1
-  maxSpawnInterval: 4
+  minSpawnInterval: 0.5
+  maxSpawnInterval: 2
   randomizeCarsPath: 1
   useForcedPath: 0
   carPrefab: {fileID: 739169608486648387, guid: 0e04b407f9b35954098893219cc821ae, type: 3}
