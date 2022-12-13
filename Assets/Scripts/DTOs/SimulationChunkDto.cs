@@ -7,7 +7,7 @@ namespace Assets.Scripts.DTOs
     public class SimulationChunkDto
     {
         public string settingsHash = "random";
-        public string mapHash = "crossroad";
+        public string mapHash = "roundabout";
         public string runId = "1";
         public List<FrameDto> frames = new List<FrameDto>();
     }
