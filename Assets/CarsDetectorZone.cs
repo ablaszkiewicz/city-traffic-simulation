@@ -21,6 +21,9 @@ public class CarsDetectorZone : MonoBehaviour
 
     private List<Car> carsInside = new List<Car>();
 
+    [SerializeField]
+    private bool includeAllCars;
+
     private MeshRenderer renderer;
     public Action OnFull;
     public Action OnEmpty;
@@ -41,12 +44,19 @@ public class CarsDetectorZone : MonoBehaviour
     {
         if (other.gameObject.GetComponentInParent<Car>())
         {
-            var pathPlanner = other.gameObject.GetComponentInParent<PathPlanner>();
-
-            //Debug.Log(pathPlanner.gameObject.name);
-            if (pathPlanner.IsCurrentOrNextPathCreator(pathCreator))
+            if (includeAllCars)
             {
                 carsInside.Add(other.gameObject.GetComponentInParent<Car>());
+            }
+            else
+            {
+                var pathPlanner = other.gameObject.GetComponentInParent<PathPlanner>();
+
+                //Debug.Log(pathPlanner.gameObject.name);
+                if (pathPlanner.IsCurrentOrNextPathCreator(pathCreator))
+                {
+                    carsInside.Add(other.gameObject.GetComponentInParent<Car>());
+                }
             }
         }
 

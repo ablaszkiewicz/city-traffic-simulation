@@ -57,6 +57,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Barrier
       objectReference: {fileID: 0}
+    - target: {fileID: 2121990438917515451, guid: 31cc709c45d1ff34f9d8f71d428d04ea, type: 3}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 3577085319130128438, guid: 31cc709c45d1ff34f9d8f71d428d04ea, type: 3}
       propertyPath: m_RootOrder
       value: 0
@@ -115,6 +119,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 8635353896637483591}
     m_Modifications:
+    - target: {fileID: 2126290220231920845, guid: 0212d61635537064a8895cb24402e13f, type: 3}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 2126290220410615332, guid: 0212d61635537064a8895cb24402e13f, type: 3}
       propertyPath: m_RootOrder
       value: 1

@@ -11,10 +11,10 @@ public class CarSpawner : MonoBehaviour
     [SerializeField]
     private int spawnLimit;
 
-    [SerializeField, Range(0.0f, 5.0f)]
+    [SerializeField, Range(0.0f, 30.0f)]
     private float minSpawnInterval;
 
-    [SerializeField, Range(0.0f, 5.0f)]
+    [SerializeField, Range(0.0f, 30.0f)]
     private float maxSpawnInterval;
     [SerializeField]
     private bool randomizeCarsPath;
