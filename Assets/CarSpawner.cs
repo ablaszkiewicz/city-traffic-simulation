@@ -28,7 +28,7 @@ public class CarSpawner : MonoBehaviour
     private List<string> carTags;
 
     [SerializeField]
-    private Road finishRoad;
+    private List<Road> finishRoads;
 
     private PathFinder pathFinder;
     private int spawnedInstances;
@@ -96,6 +96,9 @@ public class CarSpawner : MonoBehaviour
         var closest = FindClosestRoad();
         var car = Instantiate(carPrefab.gameObject, closest.GetPathCreators()[0].path.GetPoint(0), Quaternion.identity);
 
+        var finishRoad = finishRoads[Random.Range(0, finishRoads.Count)];
+        Debug.Log(closest.gameObject.name);
+        Debug.Log(finishRoad.gameObject.name);
         var path = pathFinder.GetPath(closest, finishRoad);
 
         computedPath = path;

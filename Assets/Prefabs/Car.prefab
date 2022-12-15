@@ -192,7 +192,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 67208706a809083439c71d02ec2de601, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  settingsScriptableObject: {fileID: 11400000, guid: e103401b043978f40bc5305f2c6bd887, type: 2}
+  settingsScriptableObject: {fileID: 11400000, guid: 81260505e2045441e8f11f031d951ccf, type: 2}
 --- !u!114 &739169608486648384
 MonoBehaviour:
   m_ObjectHideFlags: 0

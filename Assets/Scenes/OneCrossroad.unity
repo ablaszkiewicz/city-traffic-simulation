@@ -213,13 +213,14 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   spawnLimit: 1000
-  minSpawnInterval: 0.5
-  maxSpawnInterval: 2
-  randomizeCarsPath: 1
+  minSpawnInterval: 1
+  maxSpawnInterval: 3
+  randomizeCarsPath: 0
   useForcedPath: 0
   carPrefab: {fileID: 739169608486648387, guid: 0e04b407f9b35954098893219cc821ae, type: 3}
   carTags: []
-  finishRoad: {fileID: 0}
+  finishRoads:
+  - {fileID: 354819581}
   forcedPath: []
   computedPath: []
 --- !u!1 &187043444
@@ -584,13 +585,14 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   spawnLimit: 1000
-  minSpawnInterval: 0.5
-  maxSpawnInterval: 2
-  randomizeCarsPath: 1
+  minSpawnInterval: 1
+  maxSpawnInterval: 3
+  randomizeCarsPath: 0
   useForcedPath: 0
   carPrefab: {fileID: 739169608486648387, guid: 0e04b407f9b35954098893219cc821ae, type: 3}
   carTags: []
-  finishRoad: {fileID: 0}
+  finishRoads:
+  - {fileID: 1468160409}
   forcedPath: []
   computedPath: []
 --- !u!4 &503070583
@@ -1132,6 +1134,50 @@ Transform:
   m_Father: {fileID: 1282638100}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &1185856420
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1185856421}
+  - component: {fileID: 1185856422}
+  m_Layer: 0
+  m_Name: PathFinder
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1185856421
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1185856420}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 1383613361}
+  m_RootOrder: 2
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1185856422
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1185856420}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 28974263347ba42f6bed46b5d9aedb5b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1232078087
 GameObject:
   m_ObjectHideFlags: 0
@@ -1452,13 +1498,14 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   spawnLimit: 1000
-  minSpawnInterval: 0.5
-  maxSpawnInterval: 2
-  randomizeCarsPath: 1
+  minSpawnInterval: 1
+  maxSpawnInterval: 3
+  randomizeCarsPath: 0
   useForcedPath: 0
   carPrefab: {fileID: 739169608486648387, guid: 0e04b407f9b35954098893219cc821ae, type: 3}
   carTags: []
-  finishRoad: {fileID: 0}
+  finishRoads:
+  - {fileID: 319011644}
   forcedPath: []
   computedPath: []
 --- !u!4 &1332759311
@@ -1507,6 +1554,7 @@ Transform:
   m_Children:
   - {fileID: 341393700}
   - {fileID: 95746776}
+  - {fileID: 1185856421}
   m_Father: {fileID: 0}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -1873,13 +1921,14 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   spawnLimit: 1000
-  minSpawnInterval: 0.5
-  maxSpawnInterval: 2
-  randomizeCarsPath: 1
+  minSpawnInterval: 1
+  maxSpawnInterval: 3
+  randomizeCarsPath: 0
   useForcedPath: 0
   carPrefab: {fileID: 739169608486648387, guid: 0e04b407f9b35954098893219cc821ae, type: 3}
   carTags: []
-  finishRoad: {fileID: 0}
+  finishRoads:
+  - {fileID: 1735268396}
   forcedPath: []
   computedPath: []
 --- !u!4 &1617310524
@@ -1890,7 +1939,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1617310522}
   m_LocalRotation: {x: -0, y: 0.7071069, z: -0, w: -0.7071067}
-  m_LocalPosition: {x: 1.0049787, y: 0, z: -30.435001}
+  m_LocalPosition: {x: 1.2549785, y: 0, z: -30.185001}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
