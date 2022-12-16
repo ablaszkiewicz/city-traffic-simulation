@@ -8,8 +8,7 @@ namespace Assets.Scripts
         private ProximitySensor proximitySensor;
         private Engine engine;
         private State currentStateEnum;
-
-        [SerializeField]
+        
         private SettingsScriptableObject settingsScriptableObject;
 
         public State CurrentState => currentStateEnum;
@@ -18,6 +17,7 @@ namespace Assets.Scripts
 
         private void Start()
         {
+            settingsScriptableObject = FindObjectOfType<JsonSerializer>().SettingsScriptableObject;
             proximitySensor = GetComponent<ProximitySensor>();
             engine = GetComponent<Engine>();
             InitializeStates();

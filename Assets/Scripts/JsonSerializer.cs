@@ -24,9 +24,24 @@ namespace Assets.Scripts
         private int rateLimitter = 20;
         private MapDto mapDto;
 
+        [SerializeField]
+        private string settingsHash;
+
+
+        [SerializeField]
+        private string mapHash;
+
+        [SerializeField]
+        private SettingsScriptableObject settingsScriptableObject;
+
+
+        public SettingsScriptableObject SettingsScriptableObject => settingsScriptableObject;
+
         private void Start()
         {
             simulationChunk = new SimulationChunkDto();
+            simulationChunk.settingsHash = settingsHash;
+            simulationChunk.mapHash = mapHash;
             simulationChunk.frames = new List<FrameDto>();
 
             //streamWriter = new StreamWriter("C:/Users/Aleksander/Desktop/data.json");
@@ -142,6 +157,7 @@ namespace Assets.Scripts
             });
 
 
+            map.hash = mapHash;
             return map;
         }
     }
