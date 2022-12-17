@@ -788,7 +788,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b7dd7e4c0cc080345a12949d46252f60, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  settingsHash: random
+  settingsHash: initial
   mapHash: pieckiMigowo
   settingsScriptableObject: {fileID: 11400000, guid: 81260505e2045441e8f11f031d951ccf, type: 2}
 --- !u!1 &97100792
@@ -1854,7 +1854,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &387351940
 Transform:
   m_ObjectHideFlags: 0
@@ -5631,9 +5631,9 @@ MonoBehaviour:
   editorData:
     _bezierPath:
       points:
-      - {x: -39.54277, y: 0, z: -9.986513}
-      - {x: -11.614789, y: 0, z: -0.23344505}
-      - {x: 0.7384076, y: 0, z: 0.08387041}
+      - {x: -63.501354, y: 0, z: -66.83091}
+      - {x: -34.340023, y: 0, z: 5.211685}
+      - {x: -34.09093, y: 0, z: -6.8856983}
       - {x: 5.00001, y: 0, z: -0.000011920929}
       isClosed: 0
       space: 0
@@ -6052,11 +6052,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7501465381643197712, guid: 3632c87f69b36497ba91cf679c063f88, type: 3}
       propertyPath: maxSpawnInterval
-      value: 5
+      value: 10
       objectReference: {fileID: 0}
     - target: {fileID: 7501465381643197712, guid: 3632c87f69b36497ba91cf679c063f88, type: 3}
       propertyPath: minSpawnInterval
-      value: 1
+      value: 5
       objectReference: {fileID: 0}
     - target: {fileID: 7501465381643197712, guid: 3632c87f69b36497ba91cf679c063f88, type: 3}
       propertyPath: randomizeCarsPath
@@ -7327,8 +7327,8 @@ MonoBehaviour:
   editorData:
     _bezierPath:
       points:
-      - {x: -2.5, y: 0, z: -2.5}
-      - {x: 1.3087363, y: 0, z: -2.4993434}
+      - {x: -2.5000079, y: 0, z: -2.4999921}
+      - {x: 1.3087205, y: 0, z: -2.4993243}
       - {x: 3.6984358, y: 0, z: 0.42149353}
       - {x: 3.75, y: 0, z: 3.75}
       isClosed: 0
@@ -8577,11 +8577,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7501465381643197712, guid: 3632c87f69b36497ba91cf679c063f88, type: 3}
       propertyPath: maxSpawnInterval
-      value: 2
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 7501465381643197712, guid: 3632c87f69b36497ba91cf679c063f88, type: 3}
       propertyPath: minSpawnInterval
-      value: 1
+      value: 0.5
       objectReference: {fileID: 0}
     - target: {fileID: 7501465381643197712, guid: 3632c87f69b36497ba91cf679c063f88, type: 3}
       propertyPath: randomizeCarsPath
@@ -8593,7 +8593,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7501465381643197713, guid: 3632c87f69b36497ba91cf679c063f88, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -97.35
+      value: -148.6
       objectReference: {fileID: 0}
     - target: {fileID: 7501465381643197713, guid: 3632c87f69b36497ba91cf679c063f88, type: 3}
       propertyPath: m_LocalPosition.y
@@ -8601,7 +8601,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7501465381643197713, guid: 3632c87f69b36497ba91cf679c063f88, type: 3}
       propertyPath: m_LocalPosition.z
-      value: 309.06
+      value: 276.7
       objectReference: {fileID: 0}
     - target: {fileID: 7501465381643197713, guid: 3632c87f69b36497ba91cf679c063f88, type: 3}
       propertyPath: m_LocalRotation.w
@@ -9050,11 +9050,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7501465381643197712, guid: 3632c87f69b36497ba91cf679c063f88, type: 3}
       propertyPath: maxSpawnInterval
-      value: 2
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 7501465381643197712, guid: 3632c87f69b36497ba91cf679c063f88, type: 3}
       propertyPath: minSpawnInterval
-      value: 1
+      value: 0.5
       objectReference: {fileID: 0}
     - target: {fileID: 7501465381643197712, guid: 3632c87f69b36497ba91cf679c063f88, type: 3}
       propertyPath: randomizeCarsPath
@@ -11049,11 +11049,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7501465381643197712, guid: 3632c87f69b36497ba91cf679c063f88, type: 3}
       propertyPath: maxSpawnInterval
-      value: 5
+      value: 10
       objectReference: {fileID: 0}
     - target: {fileID: 7501465381643197712, guid: 3632c87f69b36497ba91cf679c063f88, type: 3}
       propertyPath: minSpawnInterval
-      value: 1
+      value: 5
       objectReference: {fileID: 0}
     - target: {fileID: 7501465381643197712, guid: 3632c87f69b36497ba91cf679c063f88, type: 3}
       propertyPath: randomizeCarsPath

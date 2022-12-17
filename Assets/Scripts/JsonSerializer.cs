@@ -21,7 +21,7 @@ namespace Assets.Scripts
 
         private bool simulationOver = false;
         private int rateLimitterCounter = 0;
-        private int rateLimitter = 20;
+        private int rateLimitter = 40;
         private MapDto mapDto;
 
         [SerializeField]
